@@ -1,0 +1,3668 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="carbon">
+  <title>Dashboard Infografik &amp; Formulir Inspeksi HSE Digital — Tol Harbour Road II</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Carbon Light Tokens */
+      --background: #ffffff;
+      --surface-container-low: #f4f4f4;
+      --surface-container: #f4f4f4;
+      --surface-container-high: #e0e0e0;
+
+      --on-surface: #161616;
+      --on-surface-variant: #525252;
+
+      --outline: #8d8d8d;
+      --outline-variant: #e0e0e0;
+
+      --primary: #0f62fe;
+      --on-primary: #ffffff;
+      --primary-container: #d0e2ff;
+      --on-primary-container: #161616;
+      --secondary: #6f6f6f;
+      --tertiary: #198038;
+      --tertiary-container: #defbe6;
+      --on-tertiary-container: #07190c;
+      --error: #da1e28;
+      --on-error: #ffffff;
+      --error-container: #ffd7d9;
+      --on-error-container: #2d0709;
+
+      /* Shared Semantic & Focus Tokens */
+      --positive: #198038;
+      --warning: #b28600;
+      --warning-container: #fcf4d6;
+      --on-warning-container: #261b00;
+      --focus: #0f62fe;
+      --backdrop-scrim: rgb(22 22 22 / 0.52);
+
+      /* Data Series */
+      --data-1: #0f62fe;
+      --data-2: #6929c4;
+      --data-3: #005d5d;
+      --data-4: #9f1853;
+      --data-context: #8d8d8d;
+
+      /* Fonts */
+      --font-headline: 'IBM Plex Sans', sans-serif;
+      --font-body: 'IBM Plex Sans', sans-serif;
+      --font-label: 'IBM Plex Mono', monospace;
+
+      /* Type Scale (Dashboard & Tool) */
+      --display-size: clamp(1.5rem, 1.25rem + 0.9vw, 2rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Shape */
+      --rounded: 0.125rem;
+      --rounded-lg: 0.25rem;
+      --rounded-full: 0.75rem;
+
+      /* Effects */
+      --shadow-1: 0 2px 6px rgb(0 0 0 / 0.1);
+      --shadow-2: 0 4px 12px rgb(0 0 0 / 0.12);
+      --rule: 1px solid var(--outline-variant);
+      --field-rule: 1px solid var(--outline);
+      --indicator: 2px solid var(--primary);
+      --indicator-strong: 3px solid var(--primary);
+      --print-bg: #ffffff;
+      --print-ink: #161616;
+      --print-border: #d0d0d0;
+
+      /* Spacing Scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+
+      --background: #161616;
+      --surface-container-low: #262626;
+      --surface-container: #262626;
+      --surface-container-high: #393939;
+
+      --on-surface: #f4f4f4;
+      --on-surface-variant: #c6c6c6;
+
+      --outline: #6f6f6f;
+      --outline-variant: #393939;
+
+      --primary: #78a9ff;
+      --on-primary: #161616;
+      --primary-container: #002d9c;
+      --on-primary-container: #edf5ff;
+      --secondary: #a8a8a8;
+      --tertiary: #42be65;
+      --tertiary-container: #044317;
+      --on-tertiary-container: #defbe6;
+      --error: #ff8389;
+      --on-error: #161616;
+      --error-container: #520408;
+      --on-error-container: #ffd7d9;
+
+      --positive: #42be65;
+      --warning: #f1c21b;
+      --warning-container: #382a00;
+      --on-warning-container: #fcf4d6;
+      --focus: #78a9ff;
+      --backdrop-scrim: rgb(0 0 0 / 0.7);
+
+      --data-1: #78a9ff;
+      --data-2: #be95ff;
+      --data-3: #3ddbd9;
+      --data-4: #ff7eb6;
+      --data-context: #6f6f6f;
+
+      --shadow-1: 0 2px 8px rgb(0 0 0 / 0.45);
+      --shadow-2: 0 6px 16px rgb(0 0 0 / 0.55);
+    }
+
+    /* Base Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+    button, input, select, textarea { font-family: inherit; }
+
+    /* Focus Ring */
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* App Shell */
+    .app-header {
+      border-bottom: var(--rule);
+      background-color: var(--background);
+      padding: var(--space-md) var(--space-lg);
+    }
+    .header-inner {
+      max-width: 1480px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+    .header-title-block {
+      min-width: 0;
+      flex: 1 1 360px;
+    }
+    .eyebrow-mono {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--on-surface-variant);
+      margin: 0 0 var(--space-xs) 0;
+    }
+    .headline {
+      font-family: var(--font-headline);
+      font-weight: 300;
+      font-size: var(--display-size);
+      letter-spacing: 0;
+      line-height: 1.18;
+      margin: 0;
+      color: var(--on-surface);
+    }
+    .headline strong {
+      font-weight: 600;
+    }
+    .header-subtitle {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      margin: var(--space-xs) 0 0 0;
+      max-width: 72ch;
+    }
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Buttons (Carbon Square System) */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      height: 40px;
+      min-height: 40px;
+      padding: 0 var(--space-md);
+      border-radius: 0;
+      border: 1px solid transparent;
+      font-size: 0.875rem;
+      font-weight: 400;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out);
+    }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      padding-right: var(--space-lg);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background-color: color-mix(in srgb, var(--primary), var(--on-surface) 18%);
+    }
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .btn-tertiary {
+      background-color: var(--surface-container);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+    }
+    .btn-tertiary:hover:not(:disabled) {
+      background-color: var(--surface-container-high);
+    }
+    .btn-danger-ghost {
+      background-color: transparent;
+      color: var(--error);
+      border-color: var(--outline-variant);
+    }
+    .btn-danger-ghost:hover:not(:disabled) {
+      background-color: var(--error-container);
+      color: var(--on-error-container);
+    }
+    .btn-sm {
+      height: 36px;
+      min-height: 36px;
+      padding: 0 var(--space-sm);
+      font-size: 0.8125rem;
+    }
+    .btn-mobile-nav {
+      display: none;
+    }
+
+    /* Main 2-Column Workspace */
+    .workspace-shell {
+      max-width: 1480px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 276px minmax(0, 1fr);
+      min-height: calc(100vh - 110px);
+    }
+    .workspace-shell * {
+      min-width: 0;
+    }
+
+    /* Left Navigation Sidebar */
+    .side-nav {
+      background-color: var(--surface-container-low);
+      border-right: var(--rule);
+      padding: var(--space-lg) 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-lg);
+    }
+    .nav-group {
+      margin-bottom: var(--space-md);
+    }
+    .nav-group-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--on-surface-variant);
+      padding: 0 var(--space-md) var(--space-xs) var(--space-md);
+      margin: 0;
+    }
+    .nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-item-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: 0.65rem var(--space-md);
+      min-height: 44px;
+      background: transparent;
+      border: 0;
+      border-left: 3px solid transparent;
+      color: var(--on-surface-variant);
+      font-size: 0.875rem;
+      font-weight: 400;
+      text-align: left;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out);
+    }
+    .nav-item-btn:hover {
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+    .nav-item-btn.is-active {
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-weight: 600;
+      border-left: 3px solid var(--primary);
+    }
+    .nav-item-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-width: 0;
+    }
+    .nav-item-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .nav-badge {
+      font-family: var(--font-label);
+      font-size: 0.6875rem;
+      padding: 0.125rem 0.375rem;
+      background-color: var(--surface-container-high);
+      color: var(--on-surface-variant);
+      flex-shrink: 0;
+    }
+    .nav-item-btn.is-active .nav-badge {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .nav-badge-done {
+      background-color: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+
+    .sidebar-footer {
+      padding: var(--space-md);
+      border-top: var(--rule);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background-color: var(--surface-container-high);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--primary);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    /* Main Content Stage */
+    .main-stage {
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .view-panel {
+      display: none;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .view-panel.is-active {
+      display: flex;
+      animation: fadeSlide var(--dur-short) var(--ease-out);
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Status / Notification Strip */
+    .inline-banner {
+      display: none;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--surface-container);
+      border-left: 3px solid var(--primary);
+      font-size: 0.875rem;
+    }
+    .inline-banner.is-visible { display: flex; }
+    .inline-banner.is-success { border-left-color: var(--tertiary); }
+    .inline-banner.is-error { border-left-color: var(--error); }
+    .inline-banner.is-warning { border-left-color: var(--warning); }
+    .banner-body {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex: 1;
+    }
+    .banner-close {
+      background: transparent;
+      border: 0;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      padding: var(--space-xs);
+      min-width: 32px;
+      min-height: 32px;
+    }
+
+    /* Section Headings */
+    .section-head {
+      border-bottom: var(--rule);
+      padding-bottom: var(--space-sm);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .section-title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--headline-size);
+      line-height: 1.2;
+      margin: 0;
+    }
+    .section-sub {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      margin: var(--space-xs) 0 0 0;
+    }
+
+    /* Carbon Flat Gray Layers & KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .kpi-tile {
+      background-color: var(--surface-container);
+      padding: var(--space-md);
+      border-bottom: 2px solid transparent;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .kpi-tile.is-primary-tile {
+      border-bottom: var(--indicator);
+    }
+    .mono-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface-variant);
+    }
+    .kpi-value {
+      font-family: var(--font-label);
+      font-weight: 300;
+      font-size: 2rem;
+      line-height: 1.15;
+      color: var(--on-surface);
+      margin: var(--space-xs) 0;
+    }
+    .kpi-meta {
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+    }
+    .kpi-meta-positive { color: var(--tertiary); font-weight: 500; }
+    .kpi-meta-danger { color: var(--error); font-weight: 500; }
+
+    /* Filter Bar & Import Strip */
+    .filter-panel {
+      background-color: var(--surface-container);
+      padding: var(--space-md);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+      gap: var(--space-md);
+      align-items: end;
+    }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+    .field-input, .field-select, .field-textarea {
+      width: 100%;
+      background-color: var(--background);
+      color: var(--on-surface);
+      border: 0;
+      border-bottom: var(--field-rule);
+      padding: 0.5rem var(--space-md);
+      min-height: 40px;
+      font-size: 0.875rem;
+      border-radius: 0;
+    }
+    .layer .field-input,
+    .layer .field-select,
+    .layer .field-textarea {
+      background-color: var(--background);
+    }
+    .field-select {
+      padding-right: 2rem;
+    }
+    .field-textarea {
+      min-height: 96px;
+      padding: var(--space-sm) var(--space-md);
+      resize: vertical;
+    }
+    .field-input:focus, .field-select:focus, .field-textarea:focus {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
+    }
+
+    /* Import Dropzone */
+    .import-strip {
+      background-color: var(--surface-container);
+      border: 1px dashed var(--outline);
+      padding: var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+    .import-strip.is-dragover {
+      background-color: var(--primary-container);
+      border-color: var(--primary);
+    }
+    .import-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex: 1 1 320px;
+    }
+    .import-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: var(--space-sm);
+    }
+
+    /* Charts Grid */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .chart-card {
+      background-color: var(--surface-container);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .chart-title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: 1rem;
+      margin: 0;
+    }
+    .chart-wrap {
+      position: relative;
+      width: 100%;
+      min-height: 310px;
+      height: 310px;
+    }
+
+    /* Data Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border-top: var(--rule);
+      border-bottom: var(--rule);
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      text-align: left;
+    }
+    .data-table thead th {
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.75rem var(--space-md);
+      border-bottom: var(--rule);
+      white-space: nowrap;
+    }
+    .data-table tbody td {
+      padding: 0.75rem var(--space-md);
+      border-bottom: var(--rule);
+      vertical-align: top;
+    }
+    .data-table tbody tr:nth-child(even) {
+      background-color: var(--surface-container-low);
+    }
+    .data-table tbody tr:hover {
+      background-color: var(--surface-container-high);
+    }
+    .data-table tbody tr.is-selected-row {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .num-col {
+      text-align: right;
+      font-family: var(--font-label);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* Tags & Status Pills */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      height: 24px;
+      padding: 0 0.625rem;
+      border-radius: var(--rounded-full);
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .tag-blue {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .tag-ok {
+      background-color: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+    .tag-warn {
+      background-color: var(--warning-container);
+      color: var(--on-warning-container);
+    }
+    .tag-danger {
+      background-color: var(--error-container);
+      color: var(--on-error-container);
+    }
+    .tag-neutral {
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+
+    /* Record Detail Drawer (Inline Adjacent Panel) */
+    .detail-panel {
+      display: none;
+      background-color: var(--surface-container);
+      border-left: var(--indicator-strong);
+      padding: var(--space-md);
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .detail-panel.is-visible {
+      display: flex;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .checklist-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: var(--space-sm);
+    }
+    .checklist-mini-item {
+      background-color: var(--background);
+      border: var(--rule);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      font-size: 0.8125rem;
+    }
+
+    /* Photo Gallery Cards */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .photo-card {
+      background-color: var(--surface-container);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .photo-pair {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .photo-slot {
+      background-color: var(--background);
+      border: var(--rule);
+      padding: var(--space-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .photo-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background-color: var(--surface-container-low);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+    }
+    .photo-fallback {
+      padding: var(--space-md);
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .photo-source-text {
+      font-family: var(--font-label);
+      font-size: 0.6875rem;
+      color: var(--on-surface-variant);
+      word-break: break-all;
+    }
+
+    /* Form Sections */
+    .form-card {
+      background-color: var(--surface-container);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: var(--space-sm);
+    }
+    .choice-option {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      background-color: var(--background);
+      border: 1px solid var(--outline-variant);
+      padding: 0.625rem var(--space-md);
+      min-height: 44px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out);
+    }
+    .choice-option:hover {
+      background-color: var(--surface-container-high);
+    }
+    .choice-option input {
+      margin-top: 0.2rem;
+      accent-color: var(--primary);
+      flex-shrink: 0;
+    }
+    .choice-option.is-checked {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      border-color: var(--primary);
+    }
+
+    /* Checklist Matrix Rows */
+    .checklist-table {
+      display: flex;
+      flex-direction: column;
+      border-top: var(--rule);
+    }
+    .checklist-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background-color: var(--background);
+      border-bottom: var(--rule);
+    }
+    .checklist-row:nth-child(even) {
+      background-color: var(--surface-container-low);
+    }
+    .checklist-q {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .checklist-code {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+    .checklist-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+    .tri-btn {
+      min-height: 40px;
+      padding: 0 var(--space-md);
+      border: 1px solid var(--outline);
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .tri-btn:hover {
+      background-color: var(--surface-container-high);
+    }
+    .tri-btn.is-ok {
+      background-color: var(--tertiary);
+      border-color: var(--tertiary);
+      color: var(--on-primary);
+    }
+    .tri-btn.is-not-ok {
+      background-color: var(--error);
+      border-color: var(--error);
+      color: var(--on-error);
+    }
+    .tri-btn.is-na {
+      background-color: var(--surface-container-high);
+      border-color: var(--outline);
+      color: var(--on-surface);
+      font-weight: 600;
+    }
+
+    .form-footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: var(--rule);
+    }
+
+    /* Photo Lightbox */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background-color: var(--backdrop-scrim);
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+    }
+    .lightbox-overlay.is-open {
+      display: flex;
+    }
+    .lightbox-dialog {
+      background-color: var(--background);
+      border: var(--rule);
+      box-shadow: var(--shadow-2);
+      max-width: 920px;
+      width: 100%;
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .lightbox-dialog img {
+      max-height: 75vh;
+      width: 100%;
+      object-fit: contain;
+      background-color: var(--surface-container);
+    }
+
+    /* Mobile Drawer Backdrop */
+    .mobile-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      background-color: var(--backdrop-scrim);
+    }
+
+    @media (max-width: 960px) {
+      .workspace-shell {
+        grid-template-columns: 1fr;
+      }
+      .btn-mobile-nav {
+        display: inline-flex;
+      }
+      .side-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 288px;
+        z-index: 50;
+        transform: translateX(-100%);
+        transition: transform var(--dur-short) var(--ease-out);
+        overflow-y: auto;
+      }
+      .side-nav.is-open {
+        transform: translateX(0);
+      }
+      .mobile-backdrop.is-open {
+        display: block;
+      }
+      .checklist-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .app-header {
+        padding: var(--space-md);
+      }
+      .main-stage {
+        padding: var(--space-md);
+      }
+      .header-actions {
+        width: 100%;
+      }
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Print / PDF Report Styling */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm;
+      }
+      body {
+        background-color: var(--print-bg) !important;
+        color: var(--print-ink) !important;
+        font-size: 10pt;
+      }
+      .side-nav,
+      .header-actions,
+      .import-strip,
+      .filter-panel,
+      .form-footer-nav,
+      .btn,
+      .mobile-backdrop,
+      .lightbox-overlay,
+      .inline-banner {
+        display: none !important;
+      }
+      .workspace-shell {
+        display: block !important;
+      }
+      .main-stage {
+        padding: 0 !important;
+      }
+      .view-panel {
+        display: none !important;
+      }
+      .view-panel.is-active {
+        display: block !important;
+      }
+      .kpi-tile, .chart-card, .photo-card, .form-card {
+        background-color: var(--print-bg) !important;
+        border: 1px solid var(--print-border) !important;
+        break-inside: avoid;
+      }
+      .chart-wrap {
+        height: 230px !important;
+        min-height: 230px !important;
+      }
+      .data-table th, .data-table td {
+        padding: 5px 6px !important;
+        font-size: 8.5pt !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="header-title-block">
+        <p class="eyebrow-mono">FORM INSPEKSI HSE REVISI · PROYEK TOL ANCOL TIMUR – PLUIT (ELEVATED)</p>
+        <h1 class="headline"><strong>Harbour Road II</strong> — Dashboard &amp; Inspeksi K3 Digital</h1>
+        <p class="header-subtitle">Pemantauan keselamatan kerja berkala pada 11 zonasi konstruksi elevated demi mewujudkan Zero Accident. Sumber standar: Formulir Revisi HSE HBR2 &amp; Basis Data Respon Lapangan.</p>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn btn-tertiary btn-mobile-nav" id="btn-mobile-menu" onclick="toggleMobileSidebar(true)">
+          <i data-lucide="menu" aria-hidden="true"></i>
+          <span>Menu Bagian</span>
+        </button>
+        <button type="button" class="btn btn-tertiary" onclick="triggerImportPicker()">
+          <i data-lucide="upload" aria-hidden="true"></i>
+          <span>Import CSV / Excel</span>
+        </button>
+        <button type="button" class="btn btn-tertiary" onclick="exportCsvData()">
+          <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+          <span>Export CSV</span>
+        </button>
+        <button type="button" class="btn btn-tertiary" onclick="exportXlsxData()">
+          <i data-lucide="download" aria-hidden="true"></i>
+          <span>Export Excel (.xlsx)</span>
+        </button>
+        <button type="button" class="btn btn-secondary" onclick="printPdfReport()">
+          <i data-lucide="printer" aria-hidden="true"></i>
+          <span>Unduh / Cetak PDF</span>
+        </button>
+        <button type="button" class="btn btn-primary" id="btn-theme-toggle" onclick="toggleTheme()">
+          <i data-lucide="moon" id="theme-icon" aria-hidden="true"></i>
+          <span id="theme-label">Mode Gelap</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <input type="file" id="import-file-input" accept=".csv,.xlsx,.txt" style="display:none;" onchange="handleImportFileChange(this)">
+
+  <div class="mobile-backdrop" id="mobile-backdrop" onclick="toggleMobileSidebar(false)"></div>
+
+  <div class="workspace-shell">
+    <aside class="side-nav" id="side-nav" aria-label="Navigasi Bagian Dashboard dan Formulir HSE">
+      <div>
+        <div class="nav-group">
+          <p class="nav-group-label">Analitik &amp; Rekapitulasi</p>
+          <ul class="nav-list">
+            <li>
+              <button type="button" class="nav-item-btn is-active" data-view="dashboard" onclick="switchView('dashboard')">
+                <span class="nav-item-left">
+                  <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                  <span class="nav-item-text">Dashboard Infografik</span>
+                </span>
+                <span class="nav-badge" id="nav-badge-records">3</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-group">
+          <p class="nav-group-label">Formulir Inspeksi (Revisi)</p>
+          <ul class="nav-list">
+            <li>
+              <button type="button" class="nav-item-btn" data-view="sec-1" onclick="switchView('sec-1')">
+                <span class="nav-item-left">
+                  <i data-lucide="clipboard-list" aria-hidden="true"></i>
+                  <span class="nav-item-text">Bagian 1 · Identitas Inspeksi</span>
+                </span>
+                <span class="nav-badge" id="nav-badge-s1">0/5</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="sec-2a" onclick="switchView('sec-2a')">
+                <span class="nav-item-left">
+                  <i data-lucide="hard-hat" aria-hidden="true"></i>
+                  <span class="nav-item-text">Sub-Bagian A · Ketinggian</span>
+                </span>
+                <span class="nav-badge" id="nav-badge-2a">0/5</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="sec-2b" onclick="switchView('sec-2b')">
+                <span class="nav-item-left">
+                  <i data-lucide="construction" aria-hidden="true"></i>
+                  <span class="nav-item-text">Sub-Bagian B · Heavy Lifting</span>
+                </span>
+                <span class="nav-badge" id="nav-badge-2b">0/4</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="sec-2c" onclick="switchView('sec-2c')">
+                <span class="nav-item-left">
+                  <i data-lucide="traffic-cone" aria-hidden="true"></i>
+                  <span class="nav-item-text">Sub-Bagian C · Traffic Mgmt</span>
+                </span>
+                <span class="nav-badge" id="nav-badge-2c">0/4</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="sec-2d" onclick="switchView('sec-2d')">
+                <span class="nav-item-left">
+                  <i data-lucide="zap" aria-hidden="true"></i>
+                  <span class="nav-item-text">Sub-Bagian D · Listrik &amp; HK</span>
+                </span>
+                <span class="nav-badge" id="nav-badge-2d">0/3</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="sec-3" onclick="switchView('sec-3')">
+                <span class="nav-item-left">
+                  <i data-lucide="alert-triangle" aria-hidden="true"></i>
+                  <span class="nav-item-text">Bagian 3 · Temuan Bahaya</span>
+                </span>
+                <span class="nav-badge" id="nav-badge-s3">Opsional</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="sec-4" onclick="switchView('sec-4')">
+                <span class="nav-item-left">
+                  <i data-lucide="wrench" aria-hidden="true"></i>
+                  <span class="nav-item-text">Bagian 4 · Tindak Lanjut</span>
+                </span>
+                <span class="nav-badge" id="nav-badge-s4">CAPA</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="mono-label">Kelengkapan Draf</span>
+          <span class="mono-label" id="draft-progress-label">0 / 16</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="draft-progress-fill"></div>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" style="width:100%; justify-content:center;" onclick="switchView('sec-1')">
+          <i data-lucide="plus-square" aria-hidden="true"></i>
+          <span>Isi Inspeksi Baru</span>
+        </button>
+        <button type="button" class="btn btn-danger-ghost btn-sm" id="btn-reset-data" style="width:100%; justify-content:center;" onclick="resetAllData(this)">
+          <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+          <span>Pulihkan Data Awal</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-stage">
+      <!-- Inline Notification Banner -->
+      <div class="inline-banner" id="global-banner" role="status" aria-live="polite">
+        <div class="banner-body">
+          <i data-lucide="info" aria-hidden="true"></i>
+          <span id="global-banner-text">Siap digunakan.</span>
+        </div>
+        <button type="button" class="banner-close" aria-label="Tutup pemberitahuan" onclick="hideBanner()">×</button>
+      </div>
+
+      <!-- VIEW 1: DASHBOARD INFOGRAFIK -->
+      <section class="view-panel is-active" id="view-dashboard">
+        <div class="section-head">
+          <div>
+            <p class="mono-label">RINGKASAN EKSEKUTIF KESELAMATAN KONSTRUKSI</p>
+            <h2 class="section-title">Dashboard Infografik K3 Tol Harbour Road II</h2>
+          </div>
+          <span class="mono-label" id="last-updated-label">Sumber: Respon Google Form + Input Digital</span>
+        </div>
+
+        <!-- Import CSV / Excel Drag & Drop Bar -->
+        <div class="import-strip" id="import-dropzone">
+          <div class="import-info">
+            <i data-lucide="file-up" aria-hidden="true"></i>
+            <div>
+              <strong>Unggah File Respon Google Form (.CSV / .XLSX)</strong>
+              <div style="font-size:0.8125rem; color:var(--on-surface-variant);">
+                Seret &amp; lepas file respon atau klik tombol Import untuk memperbarui infografik, matriks zonasi, daftar temuan, dan pratinjau foto Google Drive secara otomatis.
+              </div>
+            </div>
+          </div>
+          <div class="import-controls">
+            <div class="field-group">
+              <label class="field-label" for="import-mode-select">Mode Import</label>
+              <select class="field-select" id="import-mode-select">
+                <option value="replace">Ganti Data Saat Ini</option>
+                <option value="merge">Gabungkan &amp; Tambah Baru</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="triggerImportPicker()">
+              <i data-lucide="folder-open" aria-hidden="true"></i>
+              <span>Pilih File (.csv / .xlsx)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-panel">
+          <div class="field-group">
+            <label class="field-label" for="filter-zone">Filter Zonasi Area Kerja</label>
+            <select class="field-select" id="filter-zone" onchange="applyDashboardFilters()">
+              <option value="ALL">Semua Zonasi (11 Zona + Historis)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="filter-job">Filter Jenis Pekerjaan</label>
+            <select class="field-select" id="filter-job" onchange="applyDashboardFilters()">
+              <option value="ALL">Semua Jenis Pekerjaan (11 Kategori)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="filter-hazard">Filter Status Temuan Bahaya</label>
+            <select class="field-select" id="filter-hazard" onchange="applyDashboardFilters()">
+              <option value="ALL">Semua Status Inspeksi</option>
+              <option value="YA">Hanya Ada Temuan Bahaya (Ya)</option>
+              <option value="TIDAK">Hanya Kondisi Aman (Tidak)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="filter-search">Cari Inspektur / PIC / Temuan</label>
+            <input type="text" class="field-input" id="filter-search" placeholder="Ketik kata kunci…" oninput="applyDashboardFilters()">
+          </div>
+          <div class="field-group">
+            <button type="button" class="btn btn-tertiary" onclick="resetDashboardFilters()">
+              <i data-lucide="filter-x" aria-hidden="true"></i>
+              <span>Reset Filter</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Summary Tiles -->
+        <div class="kpi-grid">
+          <div class="kpi-tile is-primary-tile">
+            <span class="mono-label">Total Inspeksi Masuk</span>
+            <div class="kpi-value" id="kpi-total-inspections">0</div>
+            <span class="kpi-meta" id="kpi-total-sub">Data terfilter dari basis respon</span>
+          </div>
+          <div class="kpi-tile">
+            <span class="mono-label">Tingkat Kepatuhan Checklist</span>
+            <div class="kpi-value" id="kpi-ok-rate">0%</div>
+            <span class="kpi-meta kpi-meta-positive" id="kpi-ok-detail">0 Layak · 0 Tidak Layak</span>
+          </div>
+          <div class="kpi-tile">
+            <span class="mono-label">Temuan Bahaya (Unsafe)</span>
+            <div class="kpi-value" id="kpi-hazard-count">0</div>
+            <span class="kpi-meta" id="kpi-hazard-detail">0 Kritis · 0 Sedang · 0 Rendah</span>
+          </div>
+          <div class="kpi-tile">
+            <span class="mono-label">Cakupan Zonasi Aktif</span>
+            <div class="kpi-value" id="kpi-zone-coverage">0 / 11</div>
+            <span class="kpi-meta" id="kpi-zone-detail">Zonasi Tol HBR II terinspeksi</span>
+          </div>
+        </div>
+
+        <!-- Infographics Charts Row -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-sm);">
+              <div>
+                <h3 class="chart-title">Sebaran Inspeksi &amp; Temuan per Zonasi (11 Zona Revisi)</h3>
+                <span class="mono-label">Satuan: Jumlah Laporan Inspeksi</span>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="chart-zones"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div>
+              <h3 class="chart-title">Kepatuhan Poin Checklist per Sub-Bagian K3</h3>
+              <span class="mono-label">Satuan: Jumlah Poin Pemeriksaan (OK / NOT OK / N/A)</span>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="chart-checklist"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rekapitulasi 11 Zonasi Table -->
+        <div>
+          <div class="section-head">
+            <div>
+              <p class="mono-label">REKAPITULASI ZONASI PROYEK</p>
+              <h3 class="section-title" style="font-size:var(--subhead-size);">Matriks Kinerja K3 pada 11 Zonasi Area Kerja</h3>
+            </div>
+            <span class="mono-label" id="zone-matrix-note">Klik baris zonasi untuk memfilter dashboard</span>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Zonasi Area Kerja (Standar Revisi)</th>
+                  <th class="num-col">Inspeksi</th>
+                  <th class="num-col">Poin Layak (OK)</th>
+                  <th class="num-col">Tidak Layak</th>
+                  <th class="num-col">Temuan Bahaya</th>
+                  <th>Pekerjaan Aktif &amp; Inspektur Terakhir</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-zone-matrix"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Daftar Inspeksi & Temuan Bahaya -->
+        <div>
+          <div class="section-head">
+            <div>
+              <p class="mono-label">LOG INSPEKSI &amp; TINDAK LANJUT BAHAYA</p>
+              <h3 class="section-title" style="font-size:var(--subhead-size);">Daftar Hasil Inspeksi &amp; Temuan Bahaya Lapangan</h3>
+            </div>
+            <span class="mono-label" id="table-count-label">Menampilkan 0 laporan</span>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Tanggal &amp; Waktu</th>
+                  <th>Inspektur K3</th>
+                  <th>Zonasi / Lokasi</th>
+                  <th>Jenis Pekerjaan</th>
+                  <th>Temuan &amp; Urgensi</th>
+                  <th>Deskripsi Bahaya &amp; Rekomendasi Perbaikan</th>
+                  <th>PIC &amp; Batas Waktu</th>
+                  <th class="num-col">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-inspections"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Inline Adjacent Detail Panel for Selected Inspection -->
+        <div class="detail-panel" id="inspection-detail-panel">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:var(--space-md); border-bottom:var(--rule); padding-bottom:var(--space-sm);">
+            <div>
+              <span class="mono-label">RINCIAN LENGKAP LEMBAR INSPEKSI</span>
+              <h3 class="chart-title" id="detail-panel-title">Detail Inspeksi</h3>
+            </div>
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="closeDetailPanel()">Tutup Rincian</button>
+          </div>
+          <div class="detail-grid" id="detail-meta-grid"></div>
+          <div>
+            <p class="mono-label" style="margin:0 0 var(--space-sm) 0;">Hasil 16 Poin Checklist K3 (Sub-Bagian A–D)</p>
+            <div class="checklist-mini-grid" id="detail-checklist-grid"></div>
+          </div>
+        </div>
+
+        <!-- Galeri Foto Temuan & Perbaikan -->
+        <div>
+          <div class="section-head">
+            <div>
+              <p class="mono-label">DOKUMENTASI VISUAL LAPANGAN · INTEGRASI GOOGLE DRIVE &amp; FOTO LOKAL</p>
+              <h3 class="section-title" style="font-size:var(--subhead-size);">Galeri Foto Temuan &amp; Tindakan Perbaikan</h3>
+            </div>
+            <span class="mono-label" id="gallery-count-label">0 dokumentasi foto</span>
+          </div>
+          <div class="photo-grid" id="photo-gallery-grid"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: BAGIAN 1 IDENTITAS INSPEKSI -->
+      <section class="view-panel" id="view-sec-1">
+        <div class="section-head">
+          <div>
+            <p class="mono-label">BAGIAN 1 DARI 4 · FORMULIR REVISI HBR2</p>
+            <h2 class="section-title">Identitas Inspeksi, Zonasi &amp; Jenis Pekerjaan</h2>
+            <p class="section-sub">Pilih tanggal, waktu, nama ahli K3, serta 11 zonasi dan 11 jenis pekerjaan sesuai standar formulir revisi terbaru.</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="form-tanggal">Tanggal Inspeksi *</label>
+              <input type="date" class="field-input" id="form-tanggal" oninput="updateDraftIdentity()">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="form-waktu">Waktu Inspeksi *</label>
+              <input type="time" class="field-input" id="form-waktu" oninput="updateDraftIdentity()">
+            </div>
+            <div class="field-group" style="grid-column: 1 / -1;">
+              <label class="field-label" for="form-inspektur">Nama Inspektur / Ahli K3 Konstruksi *</label>
+              <input type="text" class="field-input" id="form-inspektur" placeholder="Contoh: Dani Irawan / Handoyo / Yunus" oninput="updateDraftIdentity()">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Zonasi / Lokasi Area Kerja (11 Zonasi Revisi) *</label>
+            <div class="choice-grid" id="form-zones-grid"></div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Jenis Pekerjaan Aktif Saat Ini (11 Kategori Revisi) *</label>
+            <div class="choice-grid" id="form-jobs-grid"></div>
+          </div>
+
+          <div class="form-footer-nav">
+            <button type="button" class="btn btn-tertiary" onclick="switchView('dashboard')">
+              <i data-lucide="arrow-left" aria-hidden="true"></i>
+              <span>Kembali ke Dashboard</span>
+            </button>
+            <button type="button" class="btn btn-primary" onclick="switchView('sec-2a')">
+              <span>Lanjut ke Sub-Bagian A: Ketinggian</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: SUB-BAGIAN A -->
+      <section class="view-panel" id="view-sec-2a">
+        <div class="section-head">
+          <div>
+            <p class="mono-label">BAGIAN 2 · DAFTAR PERIKSA KONDISI K3</p>
+            <h2 class="section-title">Sub-Bagian A: Pekerjaan di Ketinggian (Working at Height)</h2>
+            <p class="section-sub">Evaluasi kepatuhan harness, lifeline, perancah, jaring pengaman, dan akses tangga pekerja.</p>
+          </div>
+          <div style="display:flex; gap:var(--space-xs);">
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="markSectionAll('A', 'OK')">Tandai Semua OK</button>
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="markSectionAll('A', 'NA')">Tandai Semua N/A</button>
+          </div>
+        </div>
+
+        <div class="form-card" style="padding:0;">
+          <div class="checklist-table" id="checklist-container-A"></div>
+          <div class="form-footer-nav" style="padding:var(--space-md);">
+            <button type="button" class="btn btn-tertiary" onclick="switchView('sec-1')">
+              <i data-lucide="arrow-left" aria-hidden="true"></i>
+              <span>Bagian 1: Identitas</span>
+            </button>
+            <button type="button" class="btn btn-primary" onclick="switchView('sec-2b')">
+              <span>Lanjut ke Sub-Bagian B: Heavy Lifting</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: SUB-BAGIAN B -->
+      <section class="view-panel" id="view-sec-2b">
+        <div class="section-head">
+          <div>
+            <p class="mono-label">BAGIAN 2 · DAFTAR PERIKSA KONDISI K3</p>
+            <h2 class="section-title">Sub-Bagian B: Pengangkatan Berat &amp; Alat Berat (Heavy Lifting)</h2>
+            <p class="section-sub">Pemeriksaan validitas SIA/SIO, Lifting Plan, alat bantu angkat (sling/shackle), dan tumpuan outrigger.</p>
+          </div>
+          <div style="display:flex; gap:var(--space-xs);">
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="markSectionAll('B', 'OK')">Tandai Semua OK</button>
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="markSectionAll('B', 'NA')">Tandai Semua N/A</button>
+          </div>
+        </div>
+
+        <div class="form-card" style="padding:0;">
+          <div class="checklist-table" id="checklist-container-B"></div>
+          <div class="form-footer-nav" style="padding:var(--space-md);">
+            <button type="button" class="btn btn-tertiary" onclick="switchView('sec-2a')">
+              <i data-lucide="arrow-left" aria-hidden="true"></i>
+              <span>Sub-Bagian A: Ketinggian</span>
+            </button>
+            <button type="button" class="btn btn-primary" onclick="switchView('sec-2c')">
+              <span>Lanjut ke Sub-Bagian C: Traffic Management</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: SUB-BAGIAN C -->
+      <section class="view-panel" id="view-sec-2c">
+        <div class="section-head">
+          <div>
+            <p class="mono-label">BAGIAN 2 · DAFTAR PERIKSA KONDISI K3</p>
+            <h2 class="section-title">Sub-Bagian C: Manajemen Lalu Lintas &amp; Area Publik (Traffic Management)</h2>
+            <p class="section-sub">Verifikasi barikade MCB/water barrier, rambu konstruksi &amp; rotator, kesiapan flagman, dan pelindung pilar jalan raya.</p>
+          </div>
+          <div style="display:flex; gap:var(--space-xs);">
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="markSectionAll('C', 'OK')">Tandai Semua OK</button>
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="markSectionAll('C', 'NA')">Tandai Semua N/A</button>
+          </div>
+        </div>
+
+        <div class="form-card" style="padding:0;">
+          <div class="checklist-table" id="checklist-container-C"></div>
+          <div class="form-footer-nav" style="padding:var(--space-md);">
+            <button type="button" class="btn btn-tertiary" onclick="switchView('sec-2b')">
+              <i data-lucide="arrow-left" aria-hidden="true"></i>
+              <span>Sub-Bagian B: Heavy Lifting</span>
+            </button>
+            <button type="button" class="btn btn-primary" onclick="switchView('sec-2d')">
+              <span>Lanjut ke Sub-Bagian D: Listrik &amp; HK</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 6: SUB-BAGIAN D -->
+      <section class="view-panel" id="view-sec-2d">
+        <div class="section-head">
+          <div>
+            <p class="mono-label">BAGIAN 2 · DAFTAR PERIKSA KONDISI K3</p>
+            <h2 class="section-title">Sub-Bagian D: Kelistrikan &amp; Housekeeping Lapangan</h2>
+            <p class="section-sub">Pemeriksaan panel listrik antiair terkunci, penggantungan kabel daya aman, serta kebersihan area dari sisa material.</p>
+          </div>
+          <div style="display:flex; gap:var(--space-xs);">
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="markSectionAll('D', 'OK')">Tandai Semua OK</button>
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="markSectionAll('D', 'NA')">Tandai Semua N/A</button>
+          </div>
+        </div>
+
+        <div class="form-card" style="padding:0;">
+          <div class="checklist-table" id="checklist-container-D"></div>
+          <div class="form-footer-nav" style="padding:var(--space-md);">
+            <button type="button" class="btn btn-tertiary" onclick="switchView('sec-2c')">
+              <i data-lucide="arrow-left" aria-hidden="true"></i>
+              <span>Sub-Bagian C: Traffic Mgmt</span>
+            </button>
+            <button type="button" class="btn btn-primary" onclick="switchView('sec-3')">
+              <span>Lanjut ke Bagian 3: Temuan Bahaya</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 7: BAGIAN 3 TEMUAN BAHAYA & DOKUMENTASI -->
+      <section class="view-panel" id="view-sec-3">
+        <div class="section-head">
+          <div>
+            <p class="mono-label">BAGIAN 3 DARI 4 · PELAPORAN KETIDAKSESUAIAN</p>
+            <h2 class="section-title">Temuan Bahaya &amp; Dokumentasi Foto Lapangan</h2>
+            <p class="section-sub">Catat unsafe action / unsafe condition, tentukan tingkat urgensi risiko, dan lampirkan tautan Google Drive atau foto lokal.</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="field-group">
+            <label class="field-label">1. Apakah Ditemukan Ketidaksesuaian / Kondisi Bahaya?</label>
+            <div class="choice-grid" style="max-width:420px;">
+              <label class="choice-option" id="opt-hazard-ya">
+                <input type="radio" name="form-hazard-found" value="Ya" onchange="setDraftHazardFound('Ya')">
+                <span><strong>Ya</strong> — Ditemukan kondisi/tindakan bahaya</span>
+              </label>
+              <label class="choice-option" id="opt-hazard-tidak">
+                <input type="radio" name="form-hazard-found" value="Tidak" onchange="setDraftHazardFound('Tidak')">
+                <span><strong>Tidak</strong> — Area kerja aman</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="form-hazard-desc">2. Deskripsi Detail Temuan Bahaya (Unsafe Action / Unsafe Condition)</label>
+            <textarea class="field-textarea" id="form-hazard-desc" placeholder="Uraikan lokasi spesifik, komponen bermasalah, atau perilaku tidak aman yang ditemukan…" oninput="updateDraftHazard()"></textarea>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">3. Tingkat Urgensi Risiko</label>
+            <div class="choice-grid" id="form-urgency-grid"></div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="form-foto-temuan-url">4. Tautan Foto Temuan Google Drive (contoh format: drive.google.com/open?id=…)</label>
+              <input type="text" class="field-input" id="form-foto-temuan-url" placeholder="Tempel tautan Google Drive atau ID file…" oninput="updateDraftPhotoUrl('temuan', this.value)">
+              <div style="display:flex; gap:var(--space-sm); margin-top:var(--space-xs); align-items:center;">
+                <label class="btn btn-tertiary btn-sm" for="form-foto-temuan-file" style="cursor:pointer;">
+                  <i data-lucide="camera" aria-hidden="true"></i>
+                  <span>Unggah Foto Lokal / Kamera (Cadangan)</span>
+                </label>
+                <input type="file" id="form-foto-temuan-file" accept="image/*" capture="environment" style="display:none;" onchange="handleLocalDraftPhoto('temuan', this)">
+              </div>
+            </div>
+            <div class="photo-slot">
+              <span class="mono-label">Pratinjau Foto Temuan</span>
+              <div class="photo-frame" id="draft-preview-temuan">
+                <div class="photo-fallback">Belum ada tautan Google Drive atau foto lokal terpasang.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-footer-nav">
+            <button type="button" class="btn btn-tertiary" onclick="switchView('sec-2d')">
+              <i data-lucide="arrow-left" aria-hidden="true"></i>
+              <span>Sub-Bagian D: Listrik &amp; HK</span>
+            </button>
+            <button type="button" class="btn btn-primary" onclick="switchView('sec-4')">
+              <span>Lanjut ke Bagian 4: Tindak Lanjut</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 8: BAGIAN 4 TINDAK LANJUT -->
+      <section class="view-panel" id="view-sec-4">
+        <div class="section-head">
+          <div>
+            <p class="mono-label">BAGIAN 4 DARI 4 · CORRECTIVE &amp; PREVENTIVE ACTION</p>
+            <h2 class="section-title">Tindak Lanjut Perbaikan (Corrective Action) &amp; Simpan</h2>
+            <p class="section-sub">Tetapkan rekomendasi tindakan perbaikan, penanggung jawab subkontraktor, target due date, serta dokumentasi perbaikan.</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="field-group">
+            <label class="field-label" for="form-rekomendasi">Rekomendasi Tindakan Perbaikan</label>
+            <textarea class="field-textarea" id="form-rekomendasi" placeholder="Contoh: Lakukan pemeriksaan berkala pada permukaan bergesekan unit launcher, ganti pin pengunci…" oninput="updateDraftFollowup()"></textarea>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="form-pic">Nama Pengawas Lapangan / PIC Subkontraktor</label>
+              <input type="text" class="field-input" id="form-pic" placeholder="Contoh: Carno GI/zay IJM / Didit (PT GI)" oninput="updateDraftFollowup()">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="form-due-date">Batas Waktu Perbaikan (Target Due Date)</label>
+              <input type="date" class="field-input" id="form-due-date" oninput="updateDraftFollowup()">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="form-foto-perbaikan-url">Tautan Foto Perbaikan Google Drive (Jika Sudah Diperbaiki)</label>
+              <input type="text" class="field-input" id="form-foto-perbaikan-url" placeholder="Tempel tautan Google Drive atau ID file…" oninput="updateDraftPhotoUrl('perbaikan', this.value)">
+              <div style="display:flex; gap:var(--space-sm); margin-top:var(--space-xs); align-items:center;">
+                <label class="btn btn-tertiary btn-sm" for="form-foto-perbaikan-file" style="cursor:pointer;">
+                  <i data-lucide="camera" aria-hidden="true"></i>
+                  <span>Unggah Foto Perbaikan Lokal</span>
+                </label>
+                <input type="file" id="form-foto-perbaikan-file" accept="image/*" capture="environment" style="display:none;" onchange="handleLocalDraftPhoto('perbaikan', this)">
+              </div>
+            </div>
+            <div class="photo-slot">
+              <span class="mono-label">Pratinjau Foto Perbaikan</span>
+              <div class="photo-frame" id="draft-preview-perbaikan">
+                <div class="photo-fallback">Belum ada foto perbaikan dilampirkan.</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background-color:var(--background); border:var(--rule); padding:var(--space-md); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:var(--space-md);">
+            <div>
+              <span class="mono-label">RINGKASAN DRAF SAAT INI</span>
+              <div id="draft-summary-line" style="font-size:0.875rem; margin-top:var(--space-xs);">Belum lengkap — pastikan Bagian 1 dan Checklist telah diisi.</div>
+            </div>
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="clearDraftForm()">Kosongkan Draf</button>
+          </div>
+
+          <div class="form-footer-nav">
+            <button type="button" class="btn btn-tertiary" onclick="switchView('sec-3')">
+              <i data-lucide="arrow-left" aria-hidden="true"></i>
+              <span>Bagian 3: Temuan Bahaya</span>
+            </button>
+            <button type="button" class="btn btn-primary" onclick="submitInspectionDraft()">
+              <i data-lucide="check-circle-2" aria-hidden="true"></i>
+              <span>Simpan Laporan ke Dashboard</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Lightbox Modal for High-Res Photo Preview -->
+  <div class="lightbox-overlay" id="photo-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+    <div class="lightbox-dialog">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:var(--space-md);">
+        <span class="mono-label" id="lightbox-caption">Pratinjau Foto Dokumentasi</span>
+        <button type="button" class="btn btn-tertiary btn-sm" onclick="closeLightbox()">Tutup</button>
+      </div>
+      <img id="lightbox-img" src="" alt="Pratinjau dokumentasi lapangan HSE Tol Harbour Road II">
+    </div>
+  </div>
+
+  <api-shim></api-shim>
+
+  <script>
+    // =========================================================================
+    // 1. MASTER DEFINITIONS (11 ZONES, 11 WORK TYPES, 16 CHECKLIST ITEMS)
+    // =========================================================================
+    const REVISED_ZONES = [
+      { code: `Zona 0`, label: `Zona 0: Abt.1 - RMO.6, P.1S - P.16S, RAF.1 - RAF.18` },
+      { code: `Zona 1`, label: `Zona 1: P.16S - P.61S, P.28N - P.63N` },
+      { code: `Zona 2`, label: `Zona 2: P.62S - P.109S, P.33N - P.130N` },
+      { code: `Zona 3`, label: `Zona 3: P.110S - P.144S, P.131N - P.170N` },
+      { code: `Zona 4`, label: `Zona 4: P.145S - P.177S, P.155N - P.182N` },
+      { code: `Zona MR Akhir`, label: `Zona MR Akhir: P.178 - P.213` },
+      { code: `Zona RAO`, label: `Zona RAO: RAO.1 - RAO.12U` },
+      { code: `Zona RAF`, label: `Zona RAF: RAF.1 - RAF.23` },
+      { code: `Zona RPO`, label: `Zona RPO: RPO.1 - RPO.28` },
+      { code: `Zona J3`, label: `Zona J3: TR-J3O, TR-RUO, GPF.1 - APF.1, RUO.1 - RO.17` },
+      { code: `Papanggo`, label: `Papanggo` }
+    ];
+
+    const REVISED_JOBS = [
+      `Pekerjaan Bor / Bored Pile`,
+      `Pekerjaan Pilecap`,
+      `Fabrikasi / Pengecoran Pier & Pier Head`,
+      `Erection Girder / Box Girder (Heavy Lifting)`,
+      `Perakitan Perancah / Scaffolding & Formwork`,
+      `Pembesian & Pengecoran Lantai Jembatan (Slab)`,
+      `Pekerjaan Asphalt`,
+      `Pekerjaan Parapet`,
+      `Pekerjaan Saluran`,
+      `Pekerjaan Arteri di Bawah Tol (Traffic Management)`,
+      `Housekeeping`
+    ];
+
+    const URGENCY_LEVELS = [
+      `Tinggi/Kritis: Pekerjaan HARUS DIHENTIKAN sementara sampai diperbaiki segera.`,
+      `Sedang: Harus diperbaiki dalam waktu maksimal 1x24 jam.`,
+      `Rendah: Perbaikan minor/pemeliharaan rutin.`
+    ];
+
+    const CHECKLIST_ITEMS = [
+      // Sub-Bagian A: Pekerjaan di Ketinggian (Working at Height)
+      {
+        id: `A1`,
+        sub: `A`,
+        subTitle: `Sub-Bagian A: Pekerjaan di Ketinggian (Working at Height)`,
+        text: `All pekerja di ketinggian wajib memakai Full Body Harness dengan double lanyard terpasang (hooked).`,
+        matchKeys: [`Full Body Harness`, `double lanyard`]
+      },
+      {
+        id: `A2`,
+        sub: `A`,
+        subTitle: `Sub-Bagian A: Pekerjaan di Ketinggian (Working at Height)`,
+        text: `Jalur keselamatan (lifeline) terbentang kencang, tidak kendur, dan terikat pada struktur yang kokoh.`,
+        matchKeys: [`lifeline`, `Jalur keselamatan`]
+      },
+      {
+        id: `A3`,
+        sub: `A`,
+        subTitle: `Sub-Bagian A: Pekerjaan di Ketinggian (Working at Height)`,
+        text: `Platform kerja / perancah (scaffolding) memiliki lantai kerja yang rapat (full plank) dan terpasang handrail serta toeboard.`,
+        matchKeys: [`full plank`, `handrail`, `toeboard`]
+      },
+      {
+        id: `A4`,
+        sub: `A`,
+        subTitle: `Sub-Bagian A: Pekerjaan di Ketinggian (Working at Height)`,
+        text: `Jaring pengaman (safety net / debris net) terpasang kuat di bawah area kerja untuk mencegah material jatuh ke jalan arteri bawah.`,
+        matchKeys: [`safety net`, `debris net`, `Jaring pengaman`]
+      },
+      {
+        id: `A5`,
+        sub: `A`,
+        subTitle: `Sub-Bagian A: Pekerjaan di Ketinggian (Working at Height)`,
+        text: `Akses tangga naik-turun pekerja (monkey ladder / temporary stair) aman, bersih, dan kokoh.`,
+        matchKeys: [`monkey ladder`, `temporary stair`, `Akses tangga`]
+      },
+      // Sub-Bagian B: Pengangkatan Berat & Alat Berat (Heavy Lifting & Heavy Equipment)
+      {
+        id: `B1`,
+        sub: `B`,
+        subTitle: `Sub-Bagian B: Pengangkatan Berat & Alat Berat (Heavy Lifting & Heavy Equipment)`,
+        text: `Dokumen Surat Izin Alat (SIA) dan Surat Izin Operator (SIO) untuk Crane / Gantry Launcher masih valid.`,
+        matchKeys: [`Surat Izin Alat`, `SIA`, `SIO`]
+      },
+      {
+        id: `B2`,
+        sub: `B`,
+        subTitle: `Sub-Bagian B: Pengangkatan Berat & Alat Berat (Heavy Lifting & Heavy Equipment)`,
+        text: `Rencana pengangkatan (Lifting Plan) sudah disetujui dan radius aman pengangkatan steril dari pekerja non-kepentingan.`,
+        matchKeys: [`Lifting Plan`, `Rencana pengangkatan`]
+      },
+      {
+        id: `B3`,
+        sub: `B`,
+        subTitle: `Sub-Bagian B: Pengangkatan Berat & Alat Berat (Heavy Lifting & Heavy Equipment)`,
+        text: `Kondisi alat bantu angkat (shackle, wire rope sling, webbing sling) dalam keadaan baik (tidak aus/putus serabut).`,
+        matchKeys: [`shackle`, `wire rope sling`, `alat bantu angkat`]
+      },
+      {
+        id: `B4`,
+        sub: `B`,
+        subTitle: `Sub-Bagian B: Pengangkatan Berat & Alat Berat (Heavy Lifting & Heavy Equipment)`,
+        text: `Outrigger crane keluar penuh dan bertumpu pada alas yang keras/kokoh (crane pads / matting).`,
+        matchKeys: [`Outrigger`, `crane pads`]
+      },
+      // Sub-Bagian C: Manajemen Lalu Lintas & Area Publik (Traffic Management)
+      {
+        id: `C1`,
+        sub: `C`,
+        subTitle: `Sub-Bagian C: Manajemen Lalu Lintas & Area Publik (Traffic Management)`,
+        text: `Pembatas area kerja (barikade beton/MCB, water barrier) terpasang rapat memisahkan proyek dengan jalur lalu lintas umum.`,
+        matchKeys: [`barikade beton`, `water barrier`, `Pembatas area kerja`]
+      },
+      {
+        id: `C2`,
+        sub: `C`,
+        subTitle: `Sub-Bagian C: Manajemen Lalu Lintas & Area Publik (Traffic Management)`,
+        text: `Rambu peringatan (Rambu Konstruksi, Lampu Rotator, String Light malam hari) berfungsi baik dan terlihat jelas oleh pengguna jalan.`,
+        matchKeys: [`Rambu peringatan`, `Lampu Rotator`, `String Light`]
+      },
+      {
+        id: `C3`,
+        sub: `C`,
+        subTitle: `Sub-Bagian C: Manajemen Lalu Lintas & Area Publik (Traffic Management)`,
+        text: `Petugas pengatur lalu lintas (flagman) berjaga aktif menggunakan rompi reflektif dan lampu stik (terutama saat window time malam).`,
+        matchKeys: [`flagman`, `rompi reflektif`]
+      },
+      {
+        id: `C4`,
+        sub: `C`,
+        subTitle: `Sub-Bagian C: Manajemen Lalu Lintas & Area Publik (Traffic Management)`,
+        text: `Kolom pilar yang berdekatan langsung dengan jalan raya telah diberi pelindung benturan (cushion / reflector sticker).`,
+        matchKeys: [`pelindung benturan`, `reflector sticker`, `Kolom pilar`]
+      },
+      // Sub-Bagian D: Kelistrikan & Housekeeping Lapangan
+      {
+        id: `D1`,
+        sub: `D`,
+        subTitle: `Sub-Bagian D: Kelistrikan & Housekeeping Lapangan`,
+        text: `Panel listrik kerja terkunci, memiliki penutup antiair, dan dipasang papan informasi bahaya kelistrikan.`,
+        matchKeys: [`Panel listrik kerja`, `penutup antiair`]
+      },
+      {
+        id: `D2`,
+        sub: `D`,
+        subTitle: `Sub-Bagian D: Kelistrikan & Housekeeping Lapangan`,
+        text: `Kabel daya listrik tidak tergeletak di tanah yang basah/tergenang, melainkan digantung aman.`,
+        matchKeys: [`Kabel daya listrik`, `digantung aman`]
+      },
+      {
+        id: `D3`,
+        sub: `D`,
+        subTitle: `Sub-Bagian D: Kelistrikan & Housekeeping Lapangan`,
+        text: `Area kerja bersih dari sisa material, kawat bendrat, potongan besi, atau sampah yang dapat menyebabkan tersandung (housekeeping).`,
+        matchKeys: [`Area kerja bersih`, `kawat bendrat`, `housekeeping`]
+      }
+    ];
+
+    const CSV_EXPORT_HEADERS = [
+      `Timestamp`,
+      `Tanggal Inspeksi`,
+      `Waktu Inspeksi`,
+      `Nama Inspektur / Ahli K3 Konstruksi`,
+      `Zonasi / Lokasi Area Kerja`,
+      `Jenis Pekerjaan Aktif Saat Ini`,
+      ...CHECKLIST_ITEMS.map(item => `${item.subTitle} [${item.text}]`),
+      `1. Apakah Ditemukan Ketidaksesuaian / Kondisi Bahaya?`,
+      `2. Deskripsi Detail Temuan Bahaya (Unsafe Action / Unsafe Condition)`,
+      `3. Tingkat Urgensi Risiko`,
+      `Rekomendasi Tindakan Perbaikan`,
+      `Nama Pengawas Lapangan / PIC Subkontraktor`,
+      `Batas Waktu Perbaikan (Target Due Date)`,
+      `Upload Foto Temuan (Jika Ada)`,
+      `Upload Foto Perbaikan (Jika Ada)`
+    ];
+
+    // =========================================================================
+    // 2. ACTUAL SOURCE RECORDS FROM GOOGLE FORM RESPONSES CSV
+    // =========================================================================
+    const INITIAL_RECORDS = [
+      {
+        id: `REC-001`,
+        timestamp: `11/20/2026 14:41:06`,
+        tanggal: `11/20/2026`,
+        waktu: `2:37:00 PM`,
+        inspektur: `Handoyo`,
+        zonasiRaw: `Zona 4: Area Ramp On/Off Ancol`,
+        pekerjaan: `Erection Girder / Box Girder (Heavy Lifting)`,
+        checklist: {
+          A1: `Layak (OK)`, A2: `Layak (OK)`, A3: `Layak (OK)`, A4: `N/A`, A5: `Layak (OK)`,
+          B1: `Layak (OK)`, B2: `Layak (OK)`, B3: `Layak (OK)`, B4: `Layak (OK)`,
+          C1: `N/A`, C2: `Layak (OK)`, C3: `Layak (OK)`, C4: `N/A`,
+          D1: `Layak (OK)`, D2: `Layak (OK)`, D3: `N/A`
+        },
+        temuanAda: `Tidak`,
+        temuanDeskripsi: ``,
+        urgensi: ``,
+        rekomendasi: ``,
+        pic: ``,
+        dueDate: ``,
+        fotoTemuan: ``,
+        fotoPerbaikan: ``
+      },
+      {
+        id: `REC-002`,
+        timestamp: `11/25/2026 13:44:55`,
+        tanggal: `9/16/2026`,
+        waktu: `3:00:00 PM`,
+        inspektur: `Dani Irawan`,
+        zonasiRaw: `Zona 3: P.110S - P.144S, P.131N - P.154N`,
+        pekerjaan: `Erection Girder / Box Girder (Heavy Lifting)`,
+        checklist: {
+          A1: `Layak (OK)`, A2: `Layak (OK)`, A3: `Layak (OK)`, A4: `Layak (OK)`, A5: `Layak (OK)`,
+          B1: `Layak (OK)`, B2: `Layak (OK)`, B3: `Layak (OK)`, B4: `Layak (OK)`,
+          C1: `Layak (OK)`, C2: `Layak (OK)`, C3: `Layak (OK)`, C4: `Layak (OK)`,
+          D1: `Layak (OK)`, D2: `Layak (OK)`, D3: `Layak (OK)`
+        },
+        temuanAda: `Ya`,
+        temuanDeskripsi: `Roda penuntun pada rear leg terlepas, pin pengunci rusak`,
+        urgensi: `Rendah: Perbaikan minor/pemeliharaan rutin.`,
+        rekomendasi: `Sering kontrol pada permukaan bergerak/bergesekan unit launcher dan lumasi agar tdk panas berlebih sehingga meminim kerusakan pada komponen LG Liando`,
+        pic: `Carno GI/zay IJM`,
+        dueDate: `9/23/2026`,
+        fotoTemuan: `drive.google.com/open?id=1pl8h6eraXiZMn5zgrh-vqk01mJQ1cYlX`,
+        fotoPerbaikan: ``
+      },
+      {
+        id: `REC-003`,
+        timestamp: `11/26/2026 7:16:50`,
+        tanggal: `11/25/2026`,
+        waktu: `9:10:00 AM`,
+        inspektur: `Yunus`,
+        zonasiRaw: `Zona RAF: RAF.1 - RAF.18`,
+        pekerjaan: `Pekerjaan Bor / Bored Pile`,
+        checklist: {
+          A1: `N/A`, A2: `N/A`, A3: `N/A`, A4: `N/A`, A5: `N/A`,
+          B1: `Layak (OK)`, B2: `N/A`, B3: `Layak (OK)`, B4: `N/A`,
+          C1: `Layak (OK)`, C2: `Layak (OK)`, C3: `Layak (OK)`, C4: `N/A`,
+          D1: `Layak (OK)`, D2: `Layak (OK)`, D3: `Layak (OK)`
+        },
+        temuanAda: `Tidak`,
+        temuanDeskripsi: ``,
+        urgensi: ``,
+        rekomendasi: ``,
+        pic: `Didit (PT GI)`,
+        dueDate: ``,
+        fotoTemuan: ``,
+        fotoPerbaikan: ``
+      }
+    ];
+
+    // =========================================================================
+    // 3. APPLICATION STATE & IN-MEMORY LOCAL PHOTO CACHE
+    // =========================================================================
+    function createEmptyDraft() {
+      const checklist = {};
+      CHECKLIST_ITEMS.forEach(item => { checklist[item.id] = ``; });
+      return {
+        tanggal: `2026-11-25`,
+        waktu: `09:00`,
+        inspektur: ``,
+        zonasiRaw: ``,
+        pekerjaanList: [],
+        checklist,
+        temuanAda: `Tidak`,
+        temuanDeskripsi: ``,
+        urgensi: ``,
+        rekomendasi: ``,
+        pic: ``,
+        dueDate: ``,
+        fotoTemuan: ``,
+        fotoPerbaikan: ``
+      };
+    }
+
+    let appState = {
+      theme: `light`,
+      activeView: `dashboard`,
+      records: JSON.parse(JSON.stringify(INITIAL_RECORDS)),
+      draft: createEmptyDraft(),
+      selectedRecordId: null
+    };
+
+    // Transient blob URLs for local image uploads (never sent to setAppState)
+    const localPhotoCache = {};
+    let chartZonesInstance = null;
+    let chartChecklistInstance = null;
+
+    // =========================================================================
+    // 4. GOOGLE DRIVE PHOTO CONVERTER & SAFE NORMALIZERS
+    // =========================================================================
+    function extractDriveId(rawInput) {
+      if (!rawInput || typeof rawInput !== `string`) return ``;
+      const trimmed = rawInput.trim();
+      if (!trimmed) return ``;
+      const idParam = trimmed.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
+      if (idParam) return idParam[1];
+      const dPath = trimmed.match(/\/d\/([a-zA-Z0-9_-]{10,})/);
+      if (dPath) return dPath[1];
+      if (/^[a-zA-Z0-9_-]{20,}$/.test(trimmed)) return trimmed;
+      return ``;
+    }
+
+    function resolvePhotoPreview(rawValue, cacheKey) {
+      if (cacheKey && localPhotoCache[cacheKey]) {
+        return {
+          src: localPhotoCache[cacheKey],
+          sourceType: `local`,
+          driveId: ``,
+          displaySource: `Foto lokal di perangkat (sesi aktif)`
+        };
+      }
+      if (!rawValue || typeof rawValue !== `string`) {
+        return { src: ``, sourceType: `none`, driveId: ``, displaySource: `` };
+      }
+      const trimmed = rawValue.trim();
+      if (!trimmed) {
+        return { src: ``, sourceType: `none`, driveId: ``, displaySource: `` };
+      }
+      const driveId = extractDriveId(trimmed);
+      if (driveId) {
+        return {
+          src: `https://lh3.googleusercontent.com/d/${driveId}=w1000`,
+          sourceType: `gdrive`,
+          driveId,
+          displaySource: `Google Drive ID: ${driveId}`
+        };
+      }
+      if (trimmed.startsWith(`blob:`) || trimmed.startsWith(`https://lh3.googleusercontent.com/`)) {
+        return {
+          src: trimmed,
+          sourceType: `direct`,
+          driveId: ``,
+          displaySource: trimmed
+        };
+      }
+      return {
+        src: ``,
+        sourceType: `text`,
+        driveId: ``,
+        displaySource: trimmed
+      };
+    }
+
+    function normalizeZoneCode(zonasiRaw) {
+      const z = (zonasiRaw || ``).trim();
+      if (!z) return `Lainnya`;
+      const lower = z.toLowerCase();
+      if (lower.startsWith(`zona 0`)) return `Zona 0`;
+      if (lower.startsWith(`zona 1`)) return `Zona 1`;
+      if (lower.startsWith(`zona 2`)) return `Zona 2`;
+      if (lower.startsWith(`zona 3`)) return `Zona 3`;
+      if (lower.startsWith(`zona 4`)) return `Zona 4`;
+      if (lower.includes(`mr akhir`)) return `Zona MR Akhir`;
+      if (lower.startsWith(`zona rao`) || lower.includes(`rao.`)) return `Zona RAO`;
+      if (lower.startsWith(`zona raf`) || lower.includes(`raf.`)) return `Zona RAF`;
+      if (lower.startsWith(`zona rpo`) || lower.includes(`rpo.`)) return `Zona RPO`;
+      if (lower.startsWith(`zona j3`) || lower.includes(`tr-j3o`)) return `Zona J3`;
+      if (lower.includes(`papanggo`)) return `Papanggo`;
+      if (lower.startsWith(`zona 5`) || lower.includes(`pluit`)) return `Zona MR Akhir`;
+      return z;
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? ``)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`)
+        .replace(/"/g, `&quot;`)
+        .replace(/'/g, `&#39;`);
+    }
+
+    function getRecordStats(rec) {
+      let ok = 0;
+      let notOk = 0;
+      let na = 0;
+      CHECKLIST_ITEMS.forEach(item => {
+        const val = (rec.checklist && rec.checklist[item.id]) || ``;
+        if (val.includes(`Layak (OK)`)) ok++;
+        else if (val.includes(`Tidak Layak`)) notOk++;
+        else if (val === `N/A`) na++;
+      });
+      return { ok, notOk, na };
+    }
+
+    function getUrgencyTagClass(urgensi) {
+      const u = (urgensi || ``).toLowerCase();
+      if (u.includes(`tinggi`) || u.includes(`kritis`)) return `tag-danger`;
+      if (u.includes(`sedang`)) return `tag-warn`;
+      if (u.includes(`rendah`)) return `tag-blue`;
+      return `tag-neutral`;
+    }
+
+    function getUrgencyShortLabel(urgensi) {
+      const u = (urgensi || ``).toLowerCase();
+      if (u.includes(`tinggi`) || u.includes(`kritis`)) return `Tinggi / Kritis`;
+      if (u.includes(`sedang`)) return `Sedang (1×24 jam)`;
+      if (u.includes(`rendah`)) return `Rendah (Minor)`;
+      return `Belum Ditentukan`;
+    }
+
+    // =========================================================================
+    // 5. STATE PERSISTENCE (GEMINI NOTEBOOK SHIM API)
+    // =========================================================================
+    async function persistAppState() {
+      if (!window.notebookAppApi || typeof window.notebookAppApi.setAppState !== `function`) return;
+      try {
+        // Strip transient blob URLs so no binary/blob references are saved
+        const cleanRecords = appState.records.map(r => ({
+          ...r,
+          fotoTemuan: (r.fotoTemuan || ``).startsWith(`blob:`) ? `` : (r.fotoTemuan || ``),
+          fotoPerbaikan: (r.fotoPerbaikan || ``).startsWith(`blob:`) ? `` : (r.fotoPerbaikan || ``)
+        }));
+        const cleanDraft = {
+          ...appState.draft,
+          fotoTemuan: (appState.draft.fotoTemuan || ``).startsWith(`blob:`) ? `` : (appState.draft.fotoTemuan || ``),
+          fotoPerbaikan: (appState.draft.fotoPerbaikan || ``).startsWith(`blob:`) ? `` : (appState.draft.fotoPerbaikan || ``)
+        };
+        await window.notebookAppApi.setAppState({
+          theme: appState.theme,
+          activeView: appState.activeView,
+          records: cleanRecords,
+          draft: cleanDraft
+        });
+      } catch (err) {
+        // Silently ignore payload errors in restricted preview
+      }
+    }
+
+    async function loadSavedState() {
+      if (!window.notebookAppApi || typeof window.notebookAppApi.getAppState !== `function`) return;
+      try {
+        const saved = await window.notebookAppApi.getAppState();
+        if (saved && typeof saved === `object`) {
+          if (saved.theme === `dark` || saved.theme === `light`) {
+            appState.theme = saved.theme;
+          }
+          if (typeof saved.activeView === `string`) {
+            appState.activeView = saved.activeView;
+          }
+          if (Array.isArray(saved.records) && saved.records.length > 0) {
+            appState.records = saved.records;
+          }
+          if (saved.draft && typeof saved.draft === `object`) {
+            appState.draft = { ...createEmptyDraft(), ...saved.draft };
+          }
+        }
+      } catch (err) {
+        // Fall back to default initial data
+      }
+    }
+
+    // =========================================================================
+    // 6. THEME TOGGLE, NAVIGATION & BANNERS
+    // =========================================================================
+    function applyTheme(theme) {
+      appState.theme = theme === `dark` ? `dark` : `light`;
+      if (appState.theme === `dark`) {
+        document.documentElement.setAttribute(`data-theme`, `dark`);
+      } else {
+        document.documentElement.removeAttribute(`data-theme`);
+      }
+      const label = document.getElementById(`theme-label`);
+      const icon = document.getElementById(`theme-icon`);
+      if (label) label.textContent = appState.theme === `dark` ? `Mode Terang` : `Mode Gelap`;
+      if (icon) {
+        icon.setAttribute(`data-lucide`, appState.theme === `dark` ? `sun` : `moon`);
+      }
+      refreshIcons();
+      renderCharts();
+    }
+
+    function toggleTheme() {
+      applyTheme(appState.theme === `dark` ? `light` : `dark`);
+      persistAppState();
+    }
+
+    function switchView(viewKey) {
+      appState.activeView = viewKey;
+      document.querySelectorAll(`.view-panel`).forEach(panel => {
+        panel.classList.toggle(`is-active`, panel.id === `view-${viewKey}`);
+      });
+      document.querySelectorAll(`.nav-item-btn`).forEach(btn => {
+        btn.classList.toggle(`is-active`, btn.dataset.view === viewKey);
+      });
+      toggleMobileSidebar(false);
+      if (viewKey === `dashboard`) {
+        renderDashboard();
+      } else {
+        syncFormDomFromDraft();
+      }
+      persistAppState();
+    }
+
+    function toggleMobileSidebar(open) {
+      const nav = document.getElementById(`side-nav`);
+      const backdrop = document.getElementById(`mobile-backdrop`);
+      if (nav) nav.classList.toggle(`is-open`, Boolean(open));
+      if (backdrop) backdrop.classList.toggle(`is-open`, Boolean(open));
+    }
+
+    function showBanner(message, type) {
+      const banner = document.getElementById(`global-banner`);
+      const text = document.getElementById(`global-banner-text`);
+      if (!banner || !text) return;
+      banner.className = `inline-banner is-visible`;
+      if (type === `success`) banner.classList.add(`is-success`);
+      if (type === `error`) banner.classList.add(`is-error`);
+      if (type === `warning`) banner.classList.add(`is-warning`);
+      text.textContent = message;
+    }
+
+    function hideBanner() {
+      const banner = document.getElementById(`global-banner`);
+      if (banner) banner.classList.remove(`is-visible`);
+    }
+
+    function refreshIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+    }
+
+    // =========================================================================
+    // 7. DASHBOARD FILTERING, METRICS, CHARTS, TABLES & PHOTO GALLERY
+    // =========================================================================
+    function populateFilterOptions() {
+      const zoneSel = document.getElementById(`filter-zone`);
+      const jobSel = document.getElementById(`filter-job`);
+      if (zoneSel) {
+        const current = zoneSel.value || `ALL`;
+        let html = `<option value="ALL">Semua Zonasi (11 Zona + Historis)</option>`;
+        REVISED_ZONES.forEach(z => {
+          html += `<option value="${escapeHtml(z.code)}">${escapeHtml(z.label)}</option>`;
+        });
+        zoneSel.innerHTML = html;
+        zoneSel.value = current;
+      }
+      if (jobSel) {
+        const current = jobSel.value || `ALL`;
+        let html = `<option value="ALL">Semua Jenis Pekerjaan (11 Kategori)</option>`;
+        REVISED_JOBS.forEach(j => {
+          html += `<option value="${escapeHtml(j)}">${escapeHtml(j)}</option>`;
+        });
+        jobSel.innerHTML = html;
+        jobSel.value = current;
+      }
+    }
+
+    function getFilteredRecords() {
+      const zoneFilter = (document.getElementById(`filter-zone`)?.value) || `ALL`;
+      const jobFilter = (document.getElementById(`filter-job`)?.value) || `ALL`;
+      const hazardFilter = (document.getElementById(`filter-hazard`)?.value) || `ALL`;
+      const searchQ = ((document.getElementById(`filter-search`)?.value) || ``).trim().toLowerCase();
+
+      return appState.records.filter(rec => {
+        if (zoneFilter !== `ALL` && normalizeZoneCode(rec.zonasiRaw) !== zoneFilter) return false;
+        if (jobFilter !== `ALL` && !(rec.pekerjaan || ``).toLowerCase().includes(jobFilter.toLowerCase())) return false;
+        const isHazard = (rec.temuanAda || ``).trim().toLowerCase() === `ya`;
+        if (hazardFilter === `YA` && !isHazard) return false;
+        if (hazardFilter === `TIDAK` && isHazard) return false;
+        if (searchQ) {
+          const hay = [
+            rec.inspektur, rec.zonasiRaw, rec.pekerjaan,
+            rec.temuanDeskripsi, rec.rekomendasi, rec.pic
+          ].join(` `).toLowerCase();
+          if (!hay.includes(searchQ)) return false;
+        }
+        return true;
+      });
+    }
+
+    function applyDashboardFilters() {
+      renderDashboard();
+    }
+
+    function resetDashboardFilters() {
+      const fz = document.getElementById(`filter-zone`);
+      const fj = document.getElementById(`filter-job`);
+      const fh = document.getElementById(`filter-hazard`);
+      const fs = document.getElementById(`filter-search`);
+      if (fz) fz.value = `ALL`;
+      if (fj) fj.value = `ALL`;
+      if (fh) fh.value = `ALL`;
+      if (fs) fs.value = ``;
+      renderDashboard();
+    }
+
+    function filterByZoneRow(zoneCode) {
+      const fz = document.getElementById(`filter-zone`);
+      if (!fz) return;
+      fz.value = fz.value === zoneCode ? `ALL` : zoneCode;
+      renderDashboard();
+    }
+
+    function renderDashboard() {
+      const filtered = getFilteredRecords();
+      const navBadge = document.getElementById(`nav-badge-records`);
+      if (navBadge) navBadge.textContent = String(appState.records.length);
+
+      // Compute KPIs
+      let totalOk = 0;
+      let totalNotOk = 0;
+      let totalNa = 0;
+      let hazardCount = 0;
+      let critCount = 0;
+      let medCount = 0;
+      let lowCount = 0;
+      const activeZoneSet = new Set();
+
+      filtered.forEach(rec => {
+        const stats = getRecordStats(rec);
+        totalOk += stats.ok;
+        totalNotOk += stats.notOk;
+        totalNa += stats.na;
+        activeZoneSet.add(normalizeZoneCode(rec.zonasiRaw));
+        if ((rec.temuanAda || ``).trim().toLowerCase() === `ya`) {
+          hazardCount++;
+          const u = (rec.urgensi || ``).toLowerCase();
+          if (u.includes(`tinggi`) || u.includes(`kritis`)) critCount++;
+          else if (u.includes(`sedang`)) medCount++;
+          else lowCount++;
+        }
+      });
+
+      const evaluated = totalOk + totalNotOk;
+      const okPct = evaluated > 0 ? ((totalOk / evaluated) * 100).toFixed(1) : `0.0`;
+
+      const elTotal = document.getElementById(`kpi-total-inspections`);
+      const elTotalSub = document.getElementById(`kpi-total-sub`);
+      const elOkRate = document.getElementById(`kpi-ok-rate`);
+      const elOkDet = document.getElementById(`kpi-ok-detail`);
+      const elHaz = document.getElementById(`kpi-hazard-count`);
+      const elHazDet = document.getElementById(`kpi-hazard-detail`);
+      const elZoneCov = document.getElementById(`kpi-zone-coverage`);
+      const elZoneDet = document.getElementById(`kpi-zone-detail`);
+
+      if (elTotal) elTotal.textContent = String(filtered.length);
+      if (elTotalSub) elTotalSub.textContent = `Dari total ${appState.records.length} catatan tersimpan`;
+      if (elOkRate) elOkRate.textContent = `${okPct}%`;
+      if (elOkDet) {
+        elOkDet.textContent = `${totalOk} Layak · ${totalNotOk} Tidak Layak · ${totalNa} N/A`;
+        elOkDet.className = totalNotOk > 0 ? `kpi-meta kpi-meta-danger` : `kpi-meta kpi-meta-positive`;
+      }
+      if (elHaz) elHaz.textContent = String(hazardCount);
+      if (elHazDet) elHazDet.textContent = `${critCount} Kritis · ${medCount} Sedang · ${lowCount} Rendah`;
+      if (elZoneCov) elZoneCov.textContent = `${activeZoneSet.size} / ${REVISED_ZONES.length}`;
+      if (elZoneDet) elZoneDet.textContent = activeZoneSet.size > 0 ? Array.from(activeZoneSet).join(`, `) : `Belum ada data zonasi`;
+
+      renderZoneMatrixTable(filtered);
+      renderInspectionsTable(filtered);
+      renderPhotoGallery(filtered);
+      renderCharts(filtered);
+      refreshIcons();
+    }
+
+    function renderZoneMatrixTable(filtered) {
+      const tbody = document.getElementById(`tbody-zone-matrix`);
+      if (!tbody) return;
+      const activeFilterZone = document.getElementById(`filter-zone`)?.value || `ALL`;
+
+      const rowsHtml = REVISED_ZONES.map(zone => {
+        const zoneRecs = appState.records.filter(r => normalizeZoneCode(r.zonasiRaw) === zone.code);
+        let ok = 0;
+        let notOk = 0;
+        let hazards = 0;
+        const jobs = new Set();
+        let lastInspector = `—`;
+
+        zoneRecs.forEach(r => {
+          const st = getRecordStats(r);
+          ok += st.ok;
+          notOk += st.notOk;
+          if ((r.temuanAda || ``).trim().toLowerCase() === `ya`) hazards++;
+          if (r.pekerjaan) jobs.add(r.pekerjaan);
+          if (r.inspektur) lastInspector = `${r.inspektur} (${r.tanggal || `-`})`;
+        });
+
+        const isSelected = activeFilterZone === zone.code;
+        const hasNote = zoneRecs.some(r => r.zonasiRaw !== zone.label)
+          ? `<div style="font-size:0.75rem; color:var(--on-surface-variant);">Label respon: ${escapeHtml(zoneRecs.map(r => r.zonasiRaw).join(`; `))}</div>`
+          : ``;
+
+        const jobsText = jobs.size > 0
+          ? `${escapeHtml(Array.from(jobs).join(`, `))} · <strong>${escapeHtml(lastInspector)}</strong>`
+          : `<span style="color:var(--on-surface-variant);">Belum ada laporan masuk</span>`;
+
+        return `<tr class="${isSelected ? `is-selected-row` : ``}" style="cursor:pointer;" onclick="filterByZoneRow('${escapeHtml(zone.code)}')">
+          <td><strong>${escapeHtml(zone.label)}</strong>${hasNote}</td>
+          <td class="num-col">${zoneRecs.length}</td>
+          <td class="num-col">${ok}</td>
+          <td class="num-col">${notOk}</td>
+          <td class="num-col">${hazards > 0 ? `<span class="tag tag-warn">${hazards} Temuan</span>` : `0`}</td>
+          <td>${jobsText}</td>
+        </tr>`;
+      }).join(``);
+
+      tbody.innerHTML = rowsHtml;
+    }
+
+    function renderInspectionsTable(filtered) {
+      const tbody = document.getElementById(`tbody-inspections`);
+      const countLbl = document.getElementById(`table-count-label`);
+      if (countLbl) countLbl.textContent = `Menampilkan ${filtered.length} laporan`;
+      if (!tbody) return;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:var(--space-lg); color:var(--on-surface-variant);">Tidak ada data inspeksi yang cocok dengan filter saat ini.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(rec => {
+        const stats = getRecordStats(rec);
+        const isHazard = (rec.temuanAda || ``).trim().toLowerCase() === `ya`;
+        const hazardTag = isHazard
+          ? `<span class="tag ${getUrgencyTagClass(rec.urgensi)}">Ya · ${escapeHtml(getUrgencyShortLabel(rec.urgensi))}</span>`
+          : `<span class="tag tag-ok">Aman (Tidak)</span>`;
+
+        const descBlock = isHazard
+          ? `<div><strong>Temuan:</strong> ${escapeHtml(rec.temuanDeskripsi || `-`)}</div>
+             <div style="font-size:0.8125rem; color:var(--on-surface-variant); margin-top:2px;"><strong>Perbaikan:</strong> ${escapeHtml(rec.rekomendasi || `-`)}</div>`
+          : `<span style="color:var(--on-surface-variant);">Tidak ditemukan ketidaksesuaian (${stats.ok} OK · ${stats.na} N/A)</span>`;
+
+        const picBlock = (rec.pic || rec.dueDate)
+          ? `<div>${escapeHtml(rec.pic || `-`)}</div><div class="mono-label">${escapeHtml(rec.dueDate || `Tanpa tenggat`)}</div>`
+          : `<span style="color:var(--on-surface-variant);">—</span>`;
+
+        const isSelected = appState.selectedRecordId === rec.id;
+
+        return `<tr class="${isSelected ? `is-selected-row` : ``}">
+          <td><div><strong>${escapeHtml(rec.tanggal || `-`)}</strong></div><div class="mono-label">${escapeHtml(rec.waktu || ``)}</div></td>
+          <td>${escapeHtml(rec.inspektur || `-`)}</td>
+          <td><div>${escapeHtml(rec.zonasiRaw || `-`)}</div><div class="mono-label">${escapeHtml(normalizeZoneCode(rec.zonasiRaw))}</div></td>
+          <td>${escapeHtml(rec.pekerjaan || `-`)}</td>
+          <td>${hazardTag}<div class="mono-label" style="margin-top:4px;">${stats.ok} OK · ${stats.notOk} NOT OK</div></td>
+          <td>${descBlock}</td>
+          <td>${picBlock}</td>
+          <td class="num-col">
+            <button type="button" class="btn btn-tertiary btn-sm" onclick="openDetailPanel('${escapeHtml(rec.id)}')">Rincian</button>
+          </td>
+        </tr>`;
+      }).join(``);
+    }
+
+    function openDetailPanel(recId) {
+      const rec = appState.records.find(r => r.id === recId);
+      const panel = document.getElementById(`inspection-detail-panel`);
+      if (!rec || !panel) return;
+      appState.selectedRecordId = recId;
+
+      const title = document.getElementById(`detail-panel-title`);
+      const metaGrid = document.getElementById(`detail-meta-grid`);
+      const checkGrid = document.getElementById(`detail-checklist-grid`);
+
+      if (title) title.textContent = `${rec.inspektur || `Inspektur`} · ${rec.zonasiRaw || `Zonasi`} (${rec.tanggal || `-`})`;
+      if (metaGrid) {
+        metaGrid.innerHTML = `
+          <div><span class="mono-label">Waktu &amp; Timestamp</span><div>${escapeHtml(rec.waktu || `-`)} (${escapeHtml(rec.timestamp || `-`)})</div></div>
+          <div><span class="mono-label">Jenis Pekerjaan</span><div>${escapeHtml(rec.pekerjaan || `-`)}</div></div>
+          <div><span class="mono-label">PIC / Subkontraktor</span><div>${escapeHtml(rec.pic || `-`)} · Tenggat: ${escapeHtml(rec.dueDate || `-`)}</div></div>
+          <div><span class="mono-label">Temuan &amp; Tindakan</span><div>${escapeHtml(rec.temuanDeskripsi || `Tidak ada temuan`)} ${rec.rekomendasi ? `→ ` + escapeHtml(rec.rekomendasi) : ``}</div></div>
+        `;
+      }
+      if (checkGrid) {
+        checkGrid.innerHTML = CHECKLIST_ITEMS.map(item => {
+          const val = (rec.checklist && rec.checklist[item.id]) || `-`;
+          let cls = `tag-neutral`;
+          if (val.includes(`Layak (OK)`)) cls = `tag-ok`;
+          else if (val.includes(`Tidak Layak`)) cls = `tag-danger`;
+          return `<div class="checklist-mini-item">
+            <span><strong>${escapeHtml(item.id)}.</strong> ${escapeHtml(item.text)}</span>
+            <span class="tag ${cls}">${escapeHtml(val)}</span>
+          </div>`;
+        }).join(``);
+      }
+
+      panel.classList.add(`is-visible`);
+      renderInspectionsTable(getFilteredRecords());
+      panel.scrollIntoView({ behavior: `smooth`, block: `nearest` });
+    }
+
+    function closeDetailPanel() {
+      appState.selectedRecordId = null;
+      const panel = document.getElementById(`inspection-detail-panel`);
+      if (panel) panel.classList.remove(`is-visible`);
+      renderInspectionsTable(getFilteredRecords());
+    }
+
+    // =========================================================================
+    // 8. PHOTO GALLERY (GOOGLE DRIVE CONVERSION + LOCAL BACKUP)
+    // =========================================================================
+    function renderPhotoGallery(filtered) {
+      const grid = document.getElementById(`photo-gallery-grid`);
+      const countLbl = document.getElementById(`gallery-count-label`);
+      if (!grid) return;
+
+      const photoRecords = filtered.filter(rec => {
+        const hasTemuan = Boolean(rec.fotoTemuan || localPhotoCache[`${rec.id}-temuan`]);
+        const hasPerbaikan = Boolean(rec.fotoPerbaikan || localPhotoCache[`${rec.id}-perbaikan`]);
+        const isHazard = (rec.temuanAda || ``).trim().toLowerCase() === `ya`;
+        return hasTemuan || hasPerbaikan || isHazard;
+      });
+
+      if (countLbl) countLbl.textContent = `${photoRecords.length} catatan dokumentasi`;
+
+      if (photoRecords.length === 0) {
+        grid.innerHTML = `<div class="photo-card"><p style="margin:0; color:var(--on-surface-variant);">Belum ada lampiran foto temuan atau perbaikan pada filter saat ini.</p></div>`;
+        return;
+      }
+
+      grid.innerHTML = photoRecords.map(rec => {
+        const temuanInfo = resolvePhotoPreview(rec.fotoTemuan, `${rec.id}-temuan`);
+        const perbaikanInfo = resolvePhotoPreview(rec.fotoPerbaikan, `${rec.id}-perbaikan`);
+
+        return `<article class="photo-card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-sm); border-bottom:var(--rule); padding-bottom:var(--space-sm);">
+            <div>
+              <span class="mono-label">${escapeHtml(rec.tanggal || `-`)} · ${escapeHtml(normalizeZoneCode(rec.zonasiRaw))}</span>
+              <h4 style="margin:2px 0 0 0; font-size:1rem;">${escapeHtml(rec.temuanDeskripsi || rec.pekerjaan || `Dokumentasi Lapangan`)}</h4>
+              <div style="font-size:0.8125rem; color:var(--on-surface-variant);">Inspektur: ${escapeHtml(rec.inspektur || `-`)} · PIC: ${escapeHtml(rec.pic || `-`)}</div>
+            </div>
+            <span class="tag ${getUrgencyTagClass(rec.urgensi)}">${escapeHtml(getUrgencyShortLabel(rec.urgensi))}</span>
+          </div>
+
+          <div class="photo-pair">
+            ${buildPhotoSlotHtml(rec.id, `temuan`, `Bukti Foto Temuan`, temuanInfo, rec.fotoTemuan)}
+            ${buildPhotoSlotHtml(rec.id, `perbaikan`, `Foto Tindak Lanjut Perbaikan`, perbaikanInfo, rec.fotoPerbaikan)}
+          </div>
+        </article>`;
+      }).join(``);
+    }
+
+    function buildPhotoSlotHtml(recId, slotType, title, info, rawVal) {
+      const inputId = `upload-${recId}-${slotType}`;
+      let mediaHtml = ``;
+      if (info.src) {
+        const safeCaption = escapeHtml(`${title} (${recId})`);
+        mediaHtml = `
+          <img src="${escapeHtml(info.src)}" alt="${safeCaption}"
+               onclick="openLightbox('${escapeHtml(info.src)}', '${safeCaption}')"
+               onerror="handleImageLoadError(this, '${escapeHtml(info.driveId || ``)}')">
+          <div class="photo-fallback" style="display:none;">
+            <strong>Pratinjau Google Drive tidak dapat dimuat langsung</strong>
+            <span>Pastikan akses file Drive disetel ke "Siapa saja yang memiliki tautan" atau unggah foto lokal sebagai cadangan.</span>
+            ${info.driveId ? `<span class="photo-source-text">ID Drive: ${escapeHtml(info.driveId)}</span>` : ``}
+          </div>`;
+      } else {
+        mediaHtml = `<div class="photo-fallback">
+          <span>Belum ada foto ${slotType === `temuan` ? `temuan` : `perbaikan`}.</span>
+        </div>`;
+      }
+
+      return `<div class="photo-slot">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:var(--space-xs);">
+          <span class="mono-label">${escapeHtml(title)}</span>
+          ${info.sourceType === `gdrive` ? `<span class="tag tag-blue">Google Drive</span>` : info.sourceType === `local` ? `<span class="tag tag-ok">Foto Lokal</span>` : ``}
+        </div>
+        <div class="photo-frame">${mediaHtml}</div>
+        ${rawVal ? `<div class="photo-source-text">Sumber: ${escapeHtml(rawVal)}</div>` : ``}
+        <div>
+          <label class="btn btn-tertiary btn-sm" for="${escapeHtml(inputId)}" style="width:100%; justify-content:center; cursor:pointer;">
+            <i data-lucide="upload" aria-hidden="true"></i>
+            <span>${info.src ? `Ganti Foto Lokal (Cadangan)` : `Unggah Foto Lokal`}</span>
+          </label>
+          <input type="file" id="${escapeHtml(inputId)}" accept="image/*" style="display:none;" onchange="handleRecordLocalPhoto('${escapeHtml(recId)}', '${escapeHtml(slotType)}', this)">
+        </div>
+      </div>`;
+    }
+
+    function handleImageLoadError(imgEl, driveId) {
+      if (!imgEl) return;
+      imgEl.style.display = `none`;
+      const fallback = imgEl.nextElementSibling;
+      if (fallback) fallback.style.display = `flex`;
+    }
+
+    function handleRecordLocalPhoto(recId, slotType, inputEl) {
+      if (!inputEl || !inputEl.files || !inputEl.files[0]) return;
+      const file = inputEl.files[0];
+      const key = `${recId}-${slotType}`;
+      if (localPhotoCache[key]) URL.revokeObjectURL(localPhotoCache[key]);
+      localPhotoCache[key] = URL.createObjectURL(file);
+      showBanner(`Foto lokal cadangan (${file.name}) berhasil dipasang pada ${recId}.`, `success`);
+      renderDashboard();
+    }
+
+    function openLightbox(src, caption) {
+      const lb = document.getElementById(`photo-lightbox`);
+      const img = document.getElementById(`lightbox-img`);
+      const cap = document.getElementById(`lightbox-caption`);
+      if (!lb || !img) return;
+      img.src = src;
+      if (cap) cap.textContent = caption || `Pratinjau Dokumentasi Foto`;
+      lb.classList.add(`is-open`);
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById(`photo-lightbox`);
+      if (lb) lb.classList.remove(`is-open`);
+    }
+
+    // =========================================================================
+    // 9. CHARTS (CHART.JS USING CARBON TOKENS)
+    // =========================================================================
+    function getCssVar(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function renderCharts(filteredRecords) {
+      if (typeof Chart === `undefined`) return;
+      const dataSrc = filteredRecords || getFilteredRecords();
+
+      const textColor = getCssVar(`--on-surface-variant`);
+      const gridColor = getCssVar(`--outline-variant`);
+      const primaryColor = getCssVar(`--data-1`);
+      const tertiaryColor = getCssVar(`--tertiary`);
+      const errorColor = getCssVar(`--error`);
+      const warnColor = getCssVar(`--warning`);
+      const contextColor = getCssVar(`--data-context`);
+      const fontLabel = `'IBM Plex Mono', monospace`;
+
+      // Chart 1: 11 Zones Breakdown
+      const ctxZones = document.getElementById(`chart-zones`);
+      if (ctxZones) {
+        const labels = REVISED_ZONES.map(z => z.code);
+        const safeCounts = [];
+        const hazardCounts = [];
+
+        REVISED_ZONES.forEach(z => {
+          const recs = dataSrc.filter(r => normalizeZoneCode(r.zonasiRaw) === z.code);
+          let haz = 0;
+          let safe = 0;
+          recs.forEach(r => {
+            if ((r.temuanAda || ``).trim().toLowerCase() === `ya`) haz++;
+            else safe++;
+          });
+          safeCounts.push(safe);
+          hazardCounts.push(haz);
+        });
+
+        if (chartZonesInstance) chartZonesInstance.destroy();
+        chartZonesInstance = new Chart(ctxZones, {
+          type: `bar`,
+          data: {
+            labels,
+            datasets: [
+              { label: `Inspeksi Aman (Tidak Ada Temuan)`, data: safeCounts, backgroundColor: primaryColor, borderWidth: 0 },
+              { label: `Ada Temuan Bahaya (Ya)`, data: hazardCounts, backgroundColor: warnColor, borderWidth: 0 }
+            ]
+          },
+          options: {
+            indexAxis: `y`,
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                stacked: true,
+                beginAtZero: true,
+                ticks: { stepSize: 1, color: textColor, font: { family: fontLabel, size: 11 } },
+                grid: { color: gridColor }
+              },
+              y: {
+                stacked: true,
+                ticks: { color: textColor, font: { family: fontLabel, size: 11 } },
+                grid: { display: false }
+              }
+            },
+            plugins: {
+              legend: {
+                position: `top`,
+                align: `start`,
+                labels: { color: textColor, boxWidth: 12, font: { family: fontLabel, size: 11 } }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 2: Sub-Bagian A, B, C, D Compliance
+      const ctxChecklist = document.getElementById(`chart-checklist`);
+      if (ctxChecklist) {
+        const subs = [
+          { code: `A`, label: `Sub A: Ketinggian` },
+          { code: `B`, label: `Sub B: Heavy Lifting` },
+          { code: `C`, label: `Sub C: Traffic Mgmt` },
+          { code: `D`, label: `Sub D: Listrik & HK` }
+        ];
+        const okArr = [];
+        const notOkArr = [];
+        const naArr = [];
+
+        subs.forEach(sub => {
+          let ok = 0;
+          let notOk = 0;
+          let na = 0;
+          const items = CHECKLIST_ITEMS.filter(i => i.sub === sub.code);
+          dataSrc.forEach(rec => {
+            items.forEach(i => {
+              const val = (rec.checklist && rec.checklist[i.id]) || ``;
+              if (val.includes(`Layak (OK)`)) ok++;
+              else if (val.includes(`Tidak Layak`)) notOk++;
+              else if (val === `N/A`) na++;
+            });
+          });
+          okArr.push(ok);
+          notOkArr.push(notOk);
+          naArr.push(na);
+        });
+
+        if (chartChecklistInstance) chartChecklistInstance.destroy();
+        chartChecklistInstance = new Chart(ctxChecklist, {
+          type: `bar`,
+          data: {
+            labels: subs.map(s => s.label),
+            datasets: [
+              { label: `Layak (OK)`, data: okArr, backgroundColor: tertiaryColor, borderWidth: 0 },
+              { label: `Tidak Layak (NOT OK)`, data: notOkArr, backgroundColor: errorColor, borderWidth: 0 },
+              { label: `N/A`, data: naArr, backgroundColor: contextColor, borderWidth: 0 }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                stacked: true,
+                ticks: { color: textColor, font: { family: fontLabel, size: 11 } },
+                grid: { display: false }
+              },
+              y: {
+                stacked: true,
+                beginAtZero: true,
+                ticks: { stepSize: 2, color: textColor, font: { family: fontLabel, size: 11 } },
+                grid: { color: gridColor }
+              }
+            },
+            plugins: {
+              legend: {
+                position: `top`,
+                align: `start`,
+                labels: { color: textColor, boxWidth: 12, font: { family: fontLabel, size: 11 } }
+              }
+            }
+          }
+        });
+      }
+    }
+
+    // =========================================================================
+    // 10. INTERACTIVE DIGITAL FORM (SECTIONS 1, 2A-2D, 3, 4)
+    // =========================================================================
+    function buildFormStaticControls() {
+      // 11 Zones Radio Cards
+      const zonesGrid = document.getElementById(`form-zones-grid`);
+      if (zonesGrid) {
+        zonesGrid.innerHTML = REVISED_ZONES.map((z, idx) => `
+          <label class="choice-option" data-zone-opt="${escapeHtml(z.label)}">
+            <input type="radio" name="form-zone-radio" value="${escapeHtml(z.label)}" onchange="selectDraftZone(this.value)">
+            <span>${escapeHtml(z.label)}</span>
+          </label>
+        `).join(``);
+      }
+
+      // 11 Jobs Checkbox Cards
+      const jobsGrid = document.getElementById(`form-jobs-grid`);
+      if (jobsGrid) {
+        jobsGrid.innerHTML = REVISED_JOBS.map(job => `
+          <label class="choice-option" data-job-opt="${escapeHtml(job)}">
+            <input type="checkbox" value="${escapeHtml(job)}" onchange="toggleDraftJob(this.value, this.checked)">
+            <span>${escapeHtml(job)}</span>
+          </label>
+        `).join(``);
+      }
+
+      // Urgency Options
+      const urgGrid = document.getElementById(`form-urgency-grid`);
+      if (urgGrid) {
+        urgGrid.innerHTML = URGENCY_LEVELS.map(u => `
+          <label class="choice-option" data-urg-opt="${escapeHtml(u)}">
+            <input type="radio" name="form-urgency-radio" value="${escapeHtml(u)}" onchange="selectDraftUrgency(this.value)">
+            <span>${escapeHtml(u)}</span>
+          </label>
+        `).join(``);
+      }
+
+      // Build Checklist Rows for A, B, C, D
+      [`A`, `B`, `C`, `D`].forEach(subCode => {
+        const container = document.getElementById(`checklist-container-${subCode}`);
+        if (!container) return;
+        const items = CHECKLIST_ITEMS.filter(i => i.sub === subCode);
+        container.innerHTML = items.map(item => `
+          <div class="checklist-row" data-check-id="${escapeHtml(item.id)}">
+            <div class="checklist-q">
+              <span class="checklist-code">POIN ${escapeHtml(item.id)}</span>
+              <span>${escapeHtml(item.text)}</span>
+            </div>
+            <div class="checklist-actions">
+              <button type="button" class="tri-btn" data-val="Layak (OK)" onclick="setChecklistAnswer('${escapeHtml(item.id)}', 'OK')">Layak (OK)</button>
+              <button type="button" class="tri-btn" data-val="Tidak Layak (NOT OK)" onclick="setChecklistAnswer('${escapeHtml(item.id)}', 'NOT_OK')">Tidak Layak</button>
+              <button type="button" class="tri-btn" data-val="N/A" onclick="setChecklistAnswer('${escapeHtml(item.id)}', 'NA')">N/A</button>
+            </div>
+          </div>
+        `).join(``);
+      });
+    }
+
+    function syncFormDomFromDraft() {
+      const d = appState.draft;
+      const elTgl = document.getElementById(`form-tanggal`);
+      const elWkt = document.getElementById(`form-waktu`);
+      const elInsp = document.getElementById(`form-inspektur`);
+      if (elTgl) elTgl.value = d.tanggal || ``;
+      if (elWkt) elWkt.value = d.waktu || ``;
+      if (elInsp) elInsp.value = d.inspektur || ``;
+
+      document.querySelectorAll(`[data-zone-opt]`).forEach(el => {
+        const val = el.getAttribute(`data-zone-opt`);
+        const checked = d.zonasiRaw === val;
+        el.classList.toggle(`is-checked`, checked);
+        const inp = el.querySelector(`input`);
+        if (inp) inp.checked = checked;
+      });
+
+      document.querySelectorAll(`[data-job-opt]`).forEach(el => {
+        const val = el.getAttribute(`data-job-opt`);
+        const checked = Array.isArray(d.pekerjaanList) && d.pekerjaanList.includes(val);
+        el.classList.toggle(`is-checked`, checked);
+        const inp = el.querySelector(`input`);
+        if (inp) inp.checked = checked;
+      });
+
+      CHECKLIST_ITEMS.forEach(item => {
+        const ans = (d.checklist && d.checklist[item.id]) || ``;
+        const row = document.querySelector(`[data-check-id="${item.id}"]`);
+        if (!row) return;
+        row.querySelectorAll(`.tri-btn`).forEach(btn => {
+          const bv = btn.getAttribute(`data-val`);
+          btn.classList.remove(`is-ok`, `is-not-ok`, `is-na`);
+          if (ans === bv) {
+            if (bv === `Layak (OK)`) btn.classList.add(`is-ok`);
+            else if (bv === `Tidak Layak (NOT OK)`) btn.classList.add(`is-not-ok`);
+            else if (bv === `N/A`) btn.classList.add(`is-na`);
+          }
+        });
+      });
+
+      const optYa = document.getElementById(`opt-hazard-ya`);
+      const optTidak = document.getElementById(`opt-hazard-tidak`);
+      if (optYa) {
+        const isYa = d.temuanAda === `Ya`;
+        optYa.classList.toggle(`is-checked`, isYa);
+        const inp = optYa.querySelector(`input`);
+        if (inp) inp.checked = isYa;
+      }
+      if (optTidak) {
+        const isTidak = d.temuanAda !== `Ya`;
+        optTidak.classList.toggle(`is-checked`, isTidak);
+        const inp = optTidak.querySelector(`input`);
+        if (inp) inp.checked = isTidak;
+      }
+
+      const elDesc = document.getElementById(`form-hazard-desc`);
+      const elRek = document.getElementById(`form-rekomendasi`);
+      const elPic = document.getElementById(`form-pic`);
+      const elDue = document.getElementById(`form-due-date`);
+      const elFT = document.getElementById(`form-foto-temuan-url`);
+      const elFP = document.getElementById(`form-foto-perbaikan-url`);
+
+      if (elDesc) elDesc.value = d.temuanDeskripsi || ``;
+      if (elRek) elRek.value = d.rekomendasi || ``;
+      if (elPic) elPic.value = d.pic || ``;
+      if (elDue) elDue.value = d.dueDate || ``;
+      if (elFT) elFT.value = d.fotoTemuan || ``;
+      if (elFP) elFP.value = d.fotoPerbaikan || ``;
+
+      document.querySelectorAll(`[data-urg-opt]`).forEach(el => {
+        const val = el.getAttribute(`data-urg-opt`);
+        const checked = d.urgensi === val;
+        el.classList.toggle(`is-checked`, checked);
+        const inp = el.querySelector(`input`);
+        if (inp) inp.checked = checked;
+      });
+
+      renderDraftPhotoPreview(`temuan`);
+      renderDraftPhotoPreview(`perbaikan`);
+      updateDraftProgressBadges();
+    }
+
+    function updateDraftProgressBadges() {
+      const d = appState.draft;
+      let s1Count = 0;
+      if (d.tanggal) s1Count++;
+      if (d.waktu) s1Count++;
+      if ((d.inspektur || ``).trim()) s1Count++;
+      if (d.zonasiRaw) s1Count++;
+      if (Array.isArray(d.pekerjaanList) && d.pekerjaanList.length > 0) s1Count++;
+
+      const b1 = document.getElementById(`nav-badge-s1`);
+      if (b1) {
+        b1.textContent = `${s1Count}/5`;
+        b1.classList.toggle(`nav-badge-done`, s1Count === 5);
+      }
+
+      let totalCheckDone = 0;
+      [`A`, `B`, `C`, `D`].forEach(sub => {
+        const items = CHECKLIST_ITEMS.filter(i => i.sub === sub);
+        const done = items.filter(i => Boolean(d.checklist[i.id])).length;
+        totalCheckDone += done;
+        const badge = document.getElementById(`nav-badge-2${sub.toLowerCase()}`);
+        if (badge) {
+          badge.textContent = `${done}/${items.length}`;
+          badge.classList.toggle(`nav-badge-done`, done === items.length);
+        }
+      });
+
+      const b3 = document.getElementById(`nav-badge-s3`);
+      if (b3) {
+        b3.textContent = d.temuanAda === `Ya` ? `Temuan Ya` : `Aman`;
+      }
+
+      const b4 = document.getElementById(`nav-badge-s4`);
+      if (b4) {
+        b4.textContent = (d.pic || ``).trim() ? `Terisi` : `CAPA`;
+      }
+
+      const progLbl = document.getElementById(`draft-progress-label`);
+      const progFill = document.getElementById(`draft-progress-fill`);
+      if (progLbl) progLbl.textContent = `${totalCheckDone} / 16`;
+      if (progFill) progFill.style.width = `${Math.round((totalCheckDone / 16) * 100)}%`;
+
+      const sumLine = document.getElementById(`draft-summary-line`);
+      if (sumLine) {
+        sumLine.textContent = `Inspektur: ${d.inspektur || `-`} · Zonasi: ${d.zonasiRaw ? normalizeZoneCode(d.zonasiRaw) : `-`} · Checklist: ${totalCheckDone}/16 terisi · Temuan Bahaya: ${d.temuanAda}`;
+      }
+    }
+
+    function updateDraftIdentity() {
+      appState.draft.tanggal = document.getElementById(`form-tanggal`)?.value || ``;
+      appState.draft.waktu = document.getElementById(`form-waktu`)?.value || ``;
+      appState.draft.inspektur = document.getElementById(`form-inspektur`)?.value || ``;
+      updateDraftProgressBadges();
+      persistAppState();
+    }
+
+    function selectDraftZone(val) {
+      appState.draft.zonasiRaw = val;
+      syncFormDomFromDraft();
+      persistAppState();
+    }
+
+    function toggleDraftJob(val, checked) {
+      const list = new Set(appState.draft.pekerjaanList || []);
+      if (checked) list.add(val);
+      else list.delete(val);
+      appState.draft.pekerjaanList = Array.from(list);
+      syncFormDomFromDraft();
+      persistAppState();
+    }
+
+    function normalizeChecklistCode(code) {
+      if (code === `OK`) return `Layak (OK)`;
+      if (code === `NOT_OK`) return `Tidak Layak (NOT OK)`;
+      if (code === `NA`) return `N/A`;
+      return code;
+    }
+
+    function setChecklistAnswer(itemId, rawCode) {
+      const val = normalizeChecklistCode(rawCode);
+      appState.draft.checklist[itemId] = val;
+      if (val === `Tidak Layak (NOT OK)`) {
+        appState.draft.temuanAda = `Ya`;
+        showBanner(`Poin ${itemId} ditandai Tidak Layak (NOT OK). Pastikan detail bahaya dicatat di Bagian 3.`, `warning`);
+      }
+      syncFormDomFromDraft();
+      persistAppState();
+    }
+
+    function markSectionAll(subCode, rawCode) {
+      const val = normalizeChecklistCode(rawCode);
+      CHECKLIST_ITEMS.filter(i => i.sub === subCode).forEach(i => {
+        appState.draft.checklist[i.id] = val;
+      });
+      syncFormDomFromDraft();
+      persistAppState();
+    }
+
+    function setDraftHazardFound(val) {
+      appState.draft.temuanAda = val;
+      syncFormDomFromDraft();
+      persistAppState();
+    }
+
+    function updateDraftHazard() {
+      appState.draft.temuanDeskripsi = document.getElementById(`form-hazard-desc`)?.value || ``;
+      updateDraftProgressBadges();
+      persistAppState();
+    }
+
+    function selectDraftUrgency(val) {
+      appState.draft.urgensi = val;
+      syncFormDomFromDraft();
+      persistAppState();
+    }
+
+    function updateDraftFollowup() {
+      appState.draft.rekomendasi = document.getElementById(`form-rekomendasi`)?.value || ``;
+      appState.draft.pic = document.getElementById(`form-pic`)?.value || ``;
+      appState.draft.dueDate = document.getElementById(`form-due-date`)?.value || ``;
+      updateDraftProgressBadges();
+      persistAppState();
+    }
+
+    function updateDraftPhotoUrl(slot, val) {
+      if (slot === `temuan`) appState.draft.fotoTemuan = val;
+      else appState.draft.fotoPerbaikan = val;
+      renderDraftPhotoPreview(slot);
+      persistAppState();
+    }
+
+    function handleLocalDraftPhoto(slot, inputEl) {
+      if (!inputEl || !inputEl.files || !inputEl.files[0]) return;
+      const file = inputEl.files[0];
+      const key = `draft-${slot}`;
+      if (localPhotoCache[key]) URL.revokeObjectURL(localPhotoCache[key]);
+      localPhotoCache[key] = URL.createObjectURL(file);
+      renderDraftPhotoPreview(slot);
+      showBanner(`Foto lokal (${file.name}) terpasang pada pratinjau formulir.`, `success`);
+    }
+
+    function renderDraftPhotoPreview(slot) {
+      const box = document.getElementById(`draft-preview-${slot}`);
+      if (!box) return;
+      const rawUrl = slot === `temuan` ? appState.draft.fotoTemuan : appState.draft.fotoPerbaikan;
+      const info = resolvePhotoPreview(rawUrl, `draft-${slot}`);
+      if (!info.src) {
+        box.innerHTML = `<div class="photo-fallback">${info.displaySource ? `Format tautan tidak dikenali sebagai ID Drive. Tempel tautan Google Drive atau unggah foto lokal.` : `Belum ada foto dilampirkan.`}</div>`;
+        return;
+      }
+      box.innerHTML = `
+        <img src="${escapeHtml(info.src)}" alt="Pratinjau foto ${slot}"
+             onclick="openLightbox('${escapeHtml(info.src)}', 'Pratinjau Draf (${slot})')"
+             onerror="handleImageLoadError(this, '${escapeHtml(info.driveId || ``)}')">
+        <div class="photo-fallback" style="display:none;">
+          <strong>Pratinjau Google Drive tidak dapat dimuat</strong>
+          <span>ID Drive terdeteksi: ${escapeHtml(info.driveId)}. Pastikan izin berbagi Drive publik atau gunakan unggahan foto lokal.</span>
+        </div>`;
+    }
+
+    function clearDraftForm() {
+      appState.draft = createEmptyDraft();
+      delete localPhotoCache[`draft-temuan`];
+      delete localPhotoCache[`draft-perbaikan`];
+      syncFormDomFromDraft();
+      persistAppState();
+      showBanner(`Draf formulir telah dikosongkan.`, `info`);
+    }
+
+    function formatDisplayDate(isoDate) {
+      if (!isoDate) return ``;
+      const m = isoDate.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (!m) return isoDate;
+      return `${Number(m[2])}/${Number(m[3])}/${m[1]}`;
+    }
+
+    function submitInspectionDraft() {
+      const d = appState.draft;
+      if (!d.tanggal || !(d.inspektur || ``).trim() || !d.zonasiRaw || !d.pekerjaanList.length) {
+        showBanner(`Lengkapi Bagian 1 terlebih dahulu: Tanggal, Nama Inspektur, Zonasi, dan minimal 1 Jenis Pekerjaan.`, `error`);
+        switchView(`sec-1`);
+        return;
+      }
+
+      const newId = `REC-${String(appState.records.length + 1).padStart(3, `0`)}-${Date.now().toString().slice(-4)}`;
+      const now = new Date();
+      const ts = `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()} ${now.toTimeString().slice(0, 8)}`;
+
+      const record = {
+        id: newId,
+        timestamp: ts,
+        tanggal: formatDisplayDate(d.tanggal),
+        waktu: d.waktu || `09:00`,
+        inspektur: d.inspektur.trim(),
+        zonasiRaw: d.zonasiRaw,
+        pekerjaan: d.pekerjaanList.join(`, `),
+        checklist: { ...d.checklist },
+        temuanAda: d.temuanAda || `Tidak`,
+        temuanDeskripsi: (d.temuanDeskripsi || ``).trim(),
+        urgensi: d.urgensi || ``,
+        rekomendasi: (d.rekomendasi || ``).trim(),
+        pic: (d.pic || ``).trim(),
+        dueDate: formatDisplayDate(d.dueDate),
+        fotoTemuan: (d.fotoTemuan || ``).trim(),
+        fotoPerbaikan: (d.fotoPerbaikan || ``).trim()
+      };
+
+      // Move any transient local draft photos to the saved record key
+      if (localPhotoCache[`draft-temuan`]) {
+        localPhotoCache[`${newId}-temuan`] = localPhotoCache[`draft-temuan`];
+        delete localPhotoCache[`draft-temuan`];
+      }
+      if (localPhotoCache[`draft-perbaikan`]) {
+        localPhotoCache[`${newId}-perbaikan`] = localPhotoCache[`draft-perbaikan`];
+        delete localPhotoCache[`draft-perbaikan`];
+      }
+
+      appState.records.unshift(record);
+      appState.draft = createEmptyDraft();
+      syncFormDomFromDraft();
+      persistAppState();
+      switchView(`dashboard`);
+      showBanner(`Laporan inspeksi baru (${record.inspektur} · ${normalizeZoneCode(record.zonasiRaw)}) berhasil disimpan ke dashboard.`, `success`);
+    }
+
+    function resetAllData(btn) {
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.querySelector(`span`).textContent = `Klik lagi untuk konfirmasi`;
+        setTimeout(() => {
+          if (btn.dataset.armed === `true`) {
+            btn.dataset.armed = `false`;
+            btn.querySelector(`span`).textContent = `Pulihkan Data Awal`;
+          }
+        }, 4000);
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.querySelector(`span`).textContent = `Pulihkan Data Awal`;
+      appState.records = JSON.parse(JSON.stringify(INITIAL_RECORDS));
+      appState.draft = createEmptyDraft();
+      appState.selectedRecordId = null;
+      syncFormDomFromDraft();
+      renderDashboard();
+      persistAppState();
+      showBanner(`Basis data berhasil dipulihkan ke 3 respon aktual Google Form awal.`, `success`);
+    }
+
+    // =========================================================================
+    // 11. CSV & XLSX (OOXML ZIP) IMPORT & EXPORT (ZERO EXTERNAL LIBRARIES)
+    // =========================================================================
+    function triggerImportPicker() {
+      const inp = document.getElementById(`import-file-input`);
+      if (inp) {
+        inp.value = ``;
+        inp.click();
+      }
+    }
+
+    function setupDragAndDrop() {
+      const dz = document.getElementById(`import-dropzone`);
+      if (!dz) return;
+      dz.addEventListener(`dragover`, e => {
+        e.preventDefault();
+        dz.classList.add(`is-dragover`);
+      });
+      dz.addEventListener(`dragleave`, () => dz.classList.remove(`is-dragover`));
+      dz.addEventListener(`drop`, e => {
+        e.preventDefault();
+        dz.classList.remove(`is-dragover`);
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+          processImportedFile(e.dataTransfer.files[0]);
+        }
+      });
+    }
+
+    function handleImportFileChange(inputEl) {
+      if (inputEl && inputEl.files && inputEl.files[0]) {
+        processImportedFile(inputEl.files[0]);
+      }
+    }
+
+    async function processImportedFile(file) {
+      const name = (file.name || ``).toLowerCase();
+      try {
+        let rows = [];
+        if (name.endsWith(`.xlsx`)) {
+          const buf = await file.arrayBuffer();
+          rows = await parseXlsxBuffer(buf);
+        } else {
+          const text = await file.text();
+          rows = parseCsvText(text);
+        }
+
+        if (!rows || rows.length < 2) {
+          showBanner(`File "${file.name}" tidak memiliki baris data yang valid.`, `error`);
+          return;
+        }
+
+        const parsedRecords = convertRowsToRecords(rows);
+        if (parsedRecords.length === 0) {
+          showBanner(`Tidak ada kolom Inspeksi HSE HBR2 yang cocok dalam "${file.name}".`, `error`);
+          return;
+        }
+
+        const mode = document.getElementById(`import-mode-select`)?.value || `replace`;
+        if (mode === `replace`) {
+          appState.records = parsedRecords;
+        } else {
+          const existingKeys = new Set(appState.records.map(r => `${r.timestamp}|${r.inspektur}|${r.zonasiRaw}`));
+          parsedRecords.forEach(r => {
+            const k = `${r.timestamp}|${r.inspektur}|${r.zonasiRaw}`;
+            if (!existingKeys.has(k)) appState.records.push(r);
+          });
+        }
+
+        appState.selectedRecordId = null;
+        resetDashboardFilters();
+        persistAppState();
+        showBanner(`Berhasil mengimpor ${parsedRecords.length} baris laporan dari "${file.name}". Dashboard diperbarui otomatis.`, `success`);
+      } catch (err) {
+        showBanner(`Gagal membaca "${file.name}": ${err.message || `format file tidak didukung`}. Coba simpan sebagai CSV UTF-8 atau XLSX standar.`, `error`);
+      }
+    }
+
+    function parseCsvText(rawText) {
+      const text = rawText.replace(/^\uFEFF/, ``);
+      const firstLineEnd = text.indexOf(`\n`);
+      const sampleLine = firstLineEnd === -1 ? text : text.slice(0, firstLineEnd);
+      let commaCount = 0;
+      let semiCount = 0;
+      let inQ = false;
+      for (let i = 0; i < sampleLine.length; i++) {
+        const c = sampleLine[i];
+        if (c === `"`) inQ = !inQ;
+        else if (!inQ && c === `,`) commaCount++;
+        else if (!inQ && c === `;`) semiCount++;
+      }
+      const delim = semiCount > commaCount ? `;` : `,`;
+
+      const rows = [];
+      let row = [];
+      let field = ``;
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        const next = text[i + 1];
+        if (inQuotes) {
+          if (ch === `"` && next === `"`) {
+            field += `"`;
+            i++;
+          } else if (ch === `"`) {
+            inQuotes = false;
+          } else {
+            field += ch;
+          }
+        } else {
+          if (ch === `"`) {
+            inQuotes = true;
+          } else if (ch === delim) {
+            row.push(field.trim());
+            field = ``;
+          } else if (ch === `\r` && next === `\n`) {
+            row.push(field.trim());
+            rows.push(row);
+            row = [];
+            field = ``;
+            i++;
+          } else if (ch === `\n` || ch === `\r`) {
+            row.push(field.trim());
+            rows.push(row);
+            row = [];
+            field = ``;
+          } else {
+            field += ch;
+          }
+        }
+      }
+      if (field.length > 0 || row.length > 0) {
+        row.push(field.trim());
+        rows.push(row);
+      }
+      return rows.filter(r => r.some(cell => cell !== ``));
+    }
+
+    async function parseXlsxBuffer(buffer) {
+      const bytes = new Uint8Array(buffer);
+      const view = new DataView(buffer);
+
+      // Locate End of Central Directory (PK\x05\x06)
+      let eocdOffset = -1;
+      for (let i = bytes.length - 22; i >= Math.max(0, bytes.length - 65558); i--) {
+        if (bytes[i] === 0x50 && bytes[i + 1] === 0x4b && bytes[i + 2] === 0x05 && bytes[i + 3] === 0x06) {
+          eocdOffset = i;
+          break;
+        }
+      }
+      if (eocdOffset === -1) throw new Error(`Struktur ZIP XLSX tidak ditemukan`);
+
+      const totalEntries = view.getUint16(eocdOffset + 10, true);
+      const cdOffset = view.getUint32(eocdOffset + 16, true);
+      const entries = {};
+      let ptr = cdOffset;
+
+      for (let idx = 0; idx < totalEntries; idx++) {
+        if (view.getUint32(ptr, true) !== 0x02014b50) break;
+        const method = view.getUint16(ptr + 10, true);
+        const compSize = view.getUint32(ptr + 20, true);
+        const fnameLen = view.getUint16(ptr + 28, true);
+        const extraLen = view.getUint16(ptr + 30, true);
+        const commentLen = view.getUint16(ptr + 32, true);
+        const localOffset = view.getUint32(ptr + 42, true);
+        const fname = new TextDecoder().decode(bytes.slice(ptr + 46, ptr + 46 + fnameLen));
+
+        const lFnameLen = view.getUint16(localOffset + 26, true);
+        const lExtraLen = view.getUint16(localOffset + 28, true);
+        const dataStart = localOffset + 30 + lFnameLen + lExtraLen;
+        const compBytes = bytes.slice(dataStart, dataStart + compSize);
+
+        entries[fname] = { method, compBytes };
+        ptr += 46 + fnameLen + extraLen + commentLen;
+      }
+
+      async function readEntryText(entry) {
+        if (!entry) return ``;
+        if (entry.method === 0) {
+          return new TextDecoder().decode(entry.compBytes);
+        }
+        if (entry.method === 8) {
+          if (typeof DecompressionStream === `undefined`) {
+            throw new Error(`Browser tidak mendukung DecompressionStream untuk membaca XLSX terkompresi`);
+          }
+          const ds = new DecompressionStream(`deflate-raw`);
+          const stream = new Blob([entry.compBytes]).stream().pipeThrough(ds);
+          const outBuf = await new Response(stream).arrayBuffer();
+          return new TextDecoder().decode(outBuf);
+        }
+        throw new Error(`Metode kompresi ZIP ${entry.method} tidak didukung`);
+      }
+
+      const sharedStrings = [];
+      if (entries[`xl/sharedStrings.xml`]) {
+        const ssXml = await readEntryText(entries[`xl/sharedStrings.xml`]);
+        const ssDoc = new DOMParser().parseFromString(ssXml, `application/xml`);
+        ssDoc.querySelectorAll(`si`).forEach(si => {
+          const texts = Array.from(si.querySelectorAll(`t`)).map(t => t.textContent || ``);
+          sharedStrings.push(texts.join(``));
+        });
+      }
+
+      const sheetKey = Object.keys(entries).find(k => /^xl\/worksheets\/sheet1\.xml$/i.test(k))
+        || Object.keys(entries).find(k => /^xl\/worksheets\/sheet\d+\.xml$/i.test(k));
+      if (!sheetKey) throw new Error(`Worksheet tidak ditemukan di dalam file XLSX`);
+
+      const sheetXml = await readEntryText(entries[sheetKey]);
+      const sheetDoc = new DOMParser().parseFromString(sheetXml, `application/xml`);
+
+      function colRefToIndex(ref) {
+        const letters = (ref || ``).replace(/[^A-Z]/gi, ``).toUpperCase();
+        let col = 0;
+        for (let i = 0; i < letters.length; i++) {
+          col = col * 26 + (letters.charCodeAt(i) - 64);
+        }
+        return Math.max(0, col - 1);
+      }
+
+      const rows = [];
+      sheetDoc.querySelectorAll(`sheetData > row`).forEach(rowEl => {
+        const rowArr = [];
+        rowEl.querySelectorAll(`c`).forEach(cellEl => {
+          const ref = cellEl.getAttribute(`r`) || ``;
+          const colIdx = ref ? colRefToIndex(ref) : rowArr.length;
+          const type = cellEl.getAttribute(`t`) || ``;
+          let val = ``;
+          if (type === `s`) {
+            const vEl = cellEl.querySelector(`v`);
+            const sIdx = vEl ? parseInt(vEl.textContent, 10) : -1;
+            val = sharedStrings[sIdx] ?? ``;
+          } else if (type === `inlineStr`) {
+            val = Array.from(cellEl.querySelectorAll(`t`)).map(t => t.textContent || ``).join(``);
+          } else {
+            const vEl = cellEl.querySelector(`v`);
+            val = vEl ? (vEl.textContent || ``) : ``;
+          }
+          while (rowArr.length <= colIdx) rowArr.push(``);
+          rowArr[colIdx] = val.trim();
+        });
+        if (rowArr.some(c => c !== ``)) rows.push(rowArr);
+      });
+      return rows;
+    }
+
+    function convertRowsToRecords(rows) {
+      const headers = rows[0].map(h => (h || ``).trim());
+      const findCol = (keywords) => headers.findIndex(h => {
+        const hl = h.toLowerCase();
+        return keywords.some(k => hl.includes(k.toLowerCase()));
+      });
+
+      const idxTimestamp = findCol([`timestamp`]);
+      const idxTanggal = findCol([`tanggal inspeksi`]);
+      const idxWaktu = findCol([`waktu inspeksi`]);
+      const idxInspektur = findCol([`nama inspektur`, `ahli k3`]);
+      const idxZonasi = findCol([`zonasi`, `lokasi area kerja`]);
+      const idxPekerjaan = findCol([`jenis pekerjaan`]);
+      const idxTemuanAda = findCol([`ditemukan ketidaksesuaian`, `kondisi bahaya?`]);
+      const idxTemuanDesc = findCol([`deskripsi detail temuan`]);
+      const idxUrgensi = findCol([`tingkat urgensi`]);
+      const idxRek = findCol([`rekomendasi tindakan`]);
+      const idxPic = findCol([`nama pengawas`, `pic subkontraktor`]);
+      const idxDue = findCol([`batas waktu perbaikan`, `target due date`]);
+      const idxFotoTemuan = findCol([`foto temuan`]);
+      const idxFotoPerbaikan = findCol([`foto perbaikan`]);
+
+      const checkColMap = {};
+      CHECKLIST_ITEMS.forEach(item => {
+        const colIdx = headers.findIndex(h => {
+          const hl = h.toLowerCase();
+          return item.matchKeys.some(k => hl.includes(k.toLowerCase()));
+        });
+        if (colIdx !== -1) checkColMap[item.id] = colIdx;
+      });
+
+      const out = [];
+      for (let r = 1; r < rows.length; r++) {
+        const row = rows[r];
+        const getVal = idx => (idx >= 0 && idx < row.length) ? (row[idx] || ``).trim() : ``;
+        const inspektur = getVal(idxInspektur);
+        const zonasiRaw = getVal(idxZonasi);
+        if (!inspektur && !zonasiRaw && !getVal(idxTanggal)) continue;
+
+        const checklist = {};
+        CHECKLIST_ITEMS.forEach(item => {
+          checklist[item.id] = getVal(checkColMap[item.id]);
+        });
+
+        out.push({
+          id: `IMP-${String(r).padStart(3, `0`)}-${Date.now().toString().slice(-3)}`,
+          timestamp: getVal(idxTimestamp),
+          tanggal: getVal(idxTanggal),
+          waktu: getVal(idxWaktu),
+          inspektur,
+          zonasiRaw,
+          pekerjaan: getVal(idxPekerjaan),
+          checklist,
+          temuanAda: getVal(idxTemuanAda) || `Tidak`,
+          temuanDeskripsi: getVal(idxTemuanDesc),
+          urgensi: getVal(idxUrgensi),
+          rekomendasi: getVal(idxRek),
+          pic: getVal(idxPic),
+          dueDate: getVal(idxDue),
+          fotoTemuan: getVal(idxFotoTemuan),
+          fotoPerbaikan: getVal(idxFotoPerbaikan)
+        });
+      }
+      return out;
+    }
+
+    function recordToRowArray(rec) {
+      return [
+        rec.timestamp || ``,
+        rec.tanggal || ``,
+        rec.waktu || ``,
+        rec.inspektur || ``,
+        rec.zonasiRaw || ``,
+        rec.pekerjaan || ``,
+        ...CHECKLIST_ITEMS.map(item => (rec.checklist && rec.checklist[item.id]) || ``),
+        rec.temuanAda || `Tidak`,
+        rec.temuanDeskripsi || ``,
+        rec.urgensi || ``,
+        rec.rekomendasi || ``,
+        rec.pic || ``,
+        rec.dueDate || ``,
+        rec.fotoTemuan || ``,
+        rec.fotoPerbaikan || ``
+      ];
+    }
+
+    function exportCsvData() {
+      const lines = [CSV_EXPORT_HEADERS, ...appState.records.map(recordToRowArray)].map(row =>
+        row.map(cell => `"${String(cell ?? ``).replace(/"/g, `""`)}"`).join(`,`)
+      );
+      const csvContent = `\uFEFF` + lines.join(`\r\n`);
+      const filename = `Respon_Inspeksi_HSE_HBR2.csv`;
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: csvContent,
+          contentType: `text/csv`,
+          encoding: `UTF-8`,
+          filename
+        });
+      } else {
+        const blob = new Blob([csvContent], { type: `text/csv;charset=utf-8;` });
+        triggerBlobDownload(blob, filename);
+      }
+      showBanner(`File CSV (${appState.records.length} baris) berhasil diunduh.`, `success`);
+    }
+
+    function crc32(bytes) {
+      let crc = 0xffffffff;
+      for (let i = 0; i < bytes.length; i++) {
+        crc ^= bytes[i];
+        for (let j = 0; j < 8; j++) {
+          crc = (crc >>> 1) ^ (0xedb88320 & -(crc & 1));
+        }
+      }
+      return (crc ^ 0xffffffff) >>> 0;
+    }
+
+    function xmlEscape(str) {
+      return String(str ?? ``)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`)
+        .replace(/"/g, `&quot;`)
+        .replace(/'/g, `&apos;`);
+    }
+
+    function colIndexToLetters(idx) {
+      let n = idx + 1;
+      let s = ``;
+      while (n > 0) {
+        const rem = (n - 1) % 26;
+        s = String.fromCharCode(65 + rem) + s;
+        n = Math.floor((n - 1) / 26);
+      }
+      return s;
+    }
+
+    function buildMinimalXlsxBlob(rows) {
+      const sheetRowsXml = rows.map((row, rIdx) => {
+        const rNum = rIdx + 1;
+        const cells = row.map((val, cIdx) => {
+          const ref = `${colIndexToLetters(cIdx)}${rNum}`;
+          return `<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${xmlEscape(val)}</t></is></c>`;
+        }).join(``);
+        return `<row r="${rNum}">${cells}</row>`;
+      }).join(``);
+
+      const files = {
+        '[Content_Types].xml': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>`,
+        '_rels/.rels': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`,
+        'xl/workbook.xml': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Inspeksi HSE HBR2" sheetId="1" r:id="rId1"/></sheets></workbook>`,
+        'xl/_rels/workbook.xml.rels': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>`,
+        'xl/worksheets/sheet1.xml': `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>${sheetRowsXml}</sheetData></worksheet>`
+      };
+
+      const enc = new TextEncoder();
+      const localParts = [];
+      const cdParts = [];
+      let offset = 0;
+
+      Object.keys(files).forEach(name => {
+        const nameBytes = enc.encode(name);
+        const dataBytes = enc.encode(files[name]);
+        const crc = crc32(dataBytes);
+
+        const lh = new Uint8Array(30 + nameBytes.length);
+        const lhv = new DataView(lh.buffer);
+        lhv.setUint32(0, 0x04034b50, true);
+        lhv.setUint16(4, 20, true);
+        lhv.setUint16(6, 0x0800, true);
+        lhv.setUint16(8, 0, true);
+        lhv.setUint32(14, crc, true);
+        lhv.setUint32(18, dataBytes.length, true);
+        lhv.setUint32(22, dataBytes.length, true);
+        lhv.setUint16(26, nameBytes.length, true);
+        lh.set(nameBytes, 30);
+
+        const cd = new Uint8Array(46 + nameBytes.length);
+        const cdv = new DataView(cd.buffer);
+        cdv.setUint32(0, 0x02014b50, true);
+        cdv.setUint16(4, 20, true);
+        cdv.setUint16(6, 20, true);
+        cdv.setUint16(8, 0x0800, true);
+        cdv.setUint16(10, 0, true);
+        cdv.setUint32(16, crc, true);
+        cdv.setUint32(20, dataBytes.length, true);
+        cdv.setUint32(24, dataBytes.length, true);
+        cdv.setUint16(28, nameBytes.length, true);
+        cdv.setUint32(42, offset, true);
+        cd.set(nameBytes, 46);
+
+        localParts.push(lh, dataBytes);
+        cdParts.push(cd);
+        offset += lh.length + dataBytes.length;
+      });
+
+      const cdSize = cdParts.reduce((acc, p) => acc + p.length, 0);
+      const eocd = new Uint8Array(22);
+      const ev = new DataView(eocd.buffer);
+      ev.setUint32(0, 0x06054b50, true);
+      ev.setUint16(8, cdParts.length, true);
+      ev.setUint16(10, cdParts.length, true);
+      ev.setUint32(12, cdSize, true);
+      ev.setUint32(16, offset, true);
+
+      return new Blob([...localParts, ...cdParts, eocd], {
+        type: `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
+      });
+    }
+
+    function exportXlsxData() {
+      const rows = [CSV_EXPORT_HEADERS, ...appState.records.map(recordToRowArray)];
+      const blob = buildMinimalXlsxBlob(rows);
+      triggerBlobDownload(blob, `Laporan_Inspeksi_HSE_HBR2.xlsx`);
+      showBanner(`File Excel (.xlsx) berisi ${appState.records.length} laporan inspeksi berhasil dibuat.`, `success`);
+    }
+
+    function triggerBlobDownload(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement(`a`);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    }
+
+    function printPdfReport() {
+      showBanner(`Membuka dialog cetak laporan PDF. Pilih "Simpan sebagai PDF / Save as PDF" pada tujuan pencetak.`, `info`);
+      setTimeout(() => {
+        window.print();
+      }, 150);
+    }
+
+    // =========================================================================
+    // 12. INITIALIZATION
+    // =========================================================================
+    async function initApp() {
+      buildFormStaticControls();
+      populateFilterOptions();
+      setupDragAndDrop();
+
+      await loadSavedState();
+      applyTheme(appState.theme);
+      syncFormDomFromDraft();
+      switchView(appState.activeView || `dashboard`);
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    document.addEventListener(`DOMContentLoaded`, initApp);
+  </script>
+</body>
+</html>
